@@ -165,9 +165,9 @@ module.exports = (app) => {
         }
     })
 
-    app.get('/facebook',passport.authenticate('facebook',{authType: 'reauthenticate', scope: [ 'email', 'user_location' ]}));
+    app.get('/page/auth/facebook',passport.authenticate('facebook',{authType: 'reauthenticate', scope: [ 'email', 'user_location' ]}));
     
-    app.get('/google',passport.authenticate('google',{scope:['email','profile'],session:false}));
+    app.get('/page/auth/google',passport.authenticate('google',{scope:['email','profile'],session:false}));
 
     app.get('/page/auth',(req,res)=>{
         return res.render('pages/authenticate.ejs');

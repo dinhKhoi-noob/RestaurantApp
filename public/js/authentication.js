@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 const registerEmailInput = document.querySelector('#register-username');
 const registerUsernameInput = document.querySelector('#register-username');
 const registerPasswordInput = document.querySelector('#register-password');
@@ -16,6 +14,11 @@ const loginSubmit = document.querySelector('#login-submit-form');
 const loginSection = document.querySelector('#login-section');
 const registerSection = document.querySelector('#register-section');
 const banner = document.querySelector('#login-section-banner');
+const slashPage = document.querySelector('#slash-page-container');
+const authPage = document.querySelector('#login-section-container');
+const backToAuthBtn = document.querySelector('#slash-page-btn');
+const googleLoginBtns = document.querySelectorAll('.form-google-login');
+const facebookLoginBtns = document.querySelectorAll('.form-facebook-login');
 
 let confirmPasswordText;
 
@@ -30,6 +33,11 @@ const loginUser = {
     password:""
 }
 
+const isValidEmail = (email) => {
+    const sampleEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return sampleEmail.test(email);
+}
+
 const showToast = (content) => {
     const notificationToastContainer = document.querySelector('#notification-toast-container');
     const notificationToastContent = document.querySelector('#notification-toast-content');
@@ -42,6 +50,18 @@ const showToast = (content) => {
         notificationToastContainer.style.visibility = 'hidden !important';
     },3000)
 }
+
+googleLoginBtns.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+        window.location.href = 'http://localhost:4000/page/auth/google';
+    })
+})
+
+facebookLoginBtns.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+        window.location.href = 'http://localhost:4000/page/auth/facebook';
+    })
+})
 
 loginEmailInput.addEventListener('keyup',(event)=>{
     loginUser.email = event.target.value;
@@ -122,11 +142,11 @@ loginPasswordEyeToggle.addEventListener('mouseleave',()=>{
 })
 
 navigateToLoginSectionBtn.addEventListener('click',()=>{
-    registerSection.classList.remove('register-content-slide-in');
     registerSection.classList.add('register-content-slide-out');
     banner.classList.remove('register-thumbnail-show');
     banner.classList.add('thumbnail-hide');
     setTimeout(()=>{
+        registerSection.classList.remove('register-content-slide-in');
         banner.style.backgroundImage = "url('/images/thumbnails/right-side-thumbnail.jpg')";
         registerSection.style.display = 'none';
         banner.classList.remove('thumbnail-hide');
@@ -137,11 +157,11 @@ navigateToLoginSectionBtn.addEventListener('click',()=>{
 })
 
 navigateToRegisterSectionBtn.addEventListener('click',()=>{
-    loginSection.classList.remove('login-content-slide-in');
     loginSection.classList.add('login-content-slide-out');
     banner.classList.remove('login-thumbnail-show');
     banner.classList.add('thumbnail-hide');
     setTimeout(()=>{
+        loginSection.classList.remove('login-content-slide-in');
         banner.style.backgroundImage = "url('/images/thumbnails/register-thumbnail.jpg')";
         loginSection.style.display = 'none';
         banner.classList.remove('thumbnail-hide');
@@ -154,11 +174,12 @@ navigateToRegisterSectionBtn.addEventListener('click',()=>{
 loginSubmit.addEventListener('submit',(event)=>{
     event.preventDefault();
     const loginEmailExclamation = document.querySelector('#login-email-exclamation');
-    if(loginUser.email === "" || !loginUser.email){
+    const status = isValidEmail(loginUser.email);
+    if(loginUser.email === "" || !loginUser.email || !status){
         loginEmailExclamation.style.visibility = 'visible'
         loginEmailInput.style.border = '1px solid #ed3b3b';
         loginEmailInput.style.color = '#ed3b3b';
-        showToast('Please enter all required field !');
+        showToast(!status?'Invalid email address':'Please enter all required field !');
         return;
     }
     else{
@@ -190,8 +211,17 @@ loginSubmit.addEventListener('submit',(event)=>{
         }
     })
     .then(content=>{
+        if(content.status === 401){
+            showToast('Invalid email address or password');
+        }
         if(content.status === 201){
-            
+            authPage.classList.add('section-hide');
+            setTimeout(()=>{
+                authPage.classList.remove('section-show');
+                slashPage.classList.add('section-show');
+                slashPage.classList.remove('section-hide');
+            },1000)
+            return;
         }
         accessToken = content.headers.get('Authorization')
         fetch('http://localhost:4000/api/auth/verify',{
@@ -201,7 +231,7 @@ loginSubmit.addEventListener('submit',(event)=>{
             }
         })
         .then(response=>response.json())
-        .then(result=>{window.location.search = `uid=${result.user.visible_id}`})
+        .then(result=>{window.location.href = `http://localhost:4000/page/index?uid=${result.user.visible_id}`})
         .catch(err=>{
             console.log(err)
         });
@@ -213,4 +243,13 @@ loginSubmit.addEventListener('submit',(event)=>{
 
 registerSection.addEventListener('submit',(event)=>{
     event.preventDefault();
+})
+
+backToAuthBtn.addEventListener('click',()=>{
+    slashPage.classList.add('section-hide');
+    setTimeout(()=>{
+        slashPage.classList.remove('section-show');
+        authPage.classList.add('section-show');
+        authPage.classList.remove('section-hide');
+    },1000)
 })

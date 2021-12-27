@@ -1,12 +1,74 @@
+@keyframes hide-page{
+    from{
+        opacity: 1;
+        left: 50%;
+    }
+    to{
+        opacity: 0;
+        left: 20%;
+    }
+}
+
+@-webkit-keyframes hide-page{
+    from{
+        opacity: 1;
+        left: 50%;
+    }
+    to{
+        opacity: 0;
+        left: 20%;
+    }
+}
+
+@keyframes show-page {
+    from{
+        opacity: 0;
+        left: 20%;
+    }
+    to{
+        opacity: 1;
+        left: 50%;
+    }
+}
+
+@-webkit-keyframes show-page{
+    from{
+        opacity: 0;
+        left: 20%;
+    }
+    to{
+        opacity: 1;
+        left: 50%;
+    }
+}
+
+.section-show{
+    display: flex !important;
+    -webkit-animation-name: show-page;
+    animation-name: show-page;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.section-hide{
+    -webkit-animation-name: hide-page;
+    animation-name: hide-page;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
 .slash-page-container{
-    /* display: none; */
+    display: none;
     width: 53rem;
     height: 35rem;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    display: flex;
     box-shadow: 0 0 5px 0;
 }
 

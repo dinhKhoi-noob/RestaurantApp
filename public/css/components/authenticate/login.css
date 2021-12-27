@@ -84,7 +84,7 @@
 
 @keyframes right-slide-in{
     from{
-        left: -10%;
+        left: 10%;
         opacity: 0;
     }
     to{
@@ -273,7 +273,7 @@
     justify-content: space-between;
     margin: 1rem 0 1.5rem 0;
 }
-.form-goolge-login{
+.form-google-login{
     background-color: white;
     cursor: pointer;
     border: 1px solid black;
@@ -281,7 +281,7 @@
     padding:10px 7px;
     color: black !important;
 }
-.form-goolge-login:hover > div,.form-goolge-login:hover{
+.form-google-login:hover > div,.form-google-login:hover{
     border: none;
     color:white !important;
     background-color: #ea4335;
