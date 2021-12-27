@@ -1,0 +1,31 @@
+.item-row{
+    display: flex;
+    margin: 5% 0;
+    padding-bottom: 3%;
+}
+.order-item{
+    &-info{
+        width: 100%;
+        font-size: 22px;
+        display: flex;
+        padding: 0 20px;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &-list{
+        &-container{
+            width: 58%;
+            // border:1px solid black;
+        }
+        &-row{
+            border-bottom: 1px solid #151515;
+            height: 100px;
+            // align-items: center;
+        }
+    }
+    &-quantity-group{
+        display: flex;
+        width: 16%;
+        justify-content: space-between;
+    }
+}

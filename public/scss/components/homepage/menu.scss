@@ -1,0 +1,81 @@
+.menu{
+    &-container{
+        padding:4%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-size: cover;
+        margin:10% 0;
+    }
+    &-title{
+        position: relative;
+        z-index: 11;
+        font-size: 40px;
+        background-color: #456854;
+        color: white;
+        width: 25%;
+        font-family: 'Raleway',sans-serif;
+        text-align: center;
+    }
+    &-list{
+        &-container{
+            width: 100%;
+            position: relative;
+            z-index: 10;
+            background-color: white;
+            padding:4% 0;
+        }
+        &-item{
+            display: flex;
+            align-items: center;
+            margin: 2% 0;
+            &-image{
+                width: 100px;
+                height: 100px;
+                background-size: cover;
+                background-position: center;
+                border-radius: 50%;
+            }
+            &-dot{
+                width: 98%;
+                display: table-cell;
+                border-bottom: 1px dotted #151515;
+                margin-top:4%;
+            }
+            &-title{
+                text-decoration: none;
+                width: 1%;
+                white-space: nowrap;
+                display: table-cell;
+                font-size: 20px;
+                color:darkgreen;
+                text-transform: capitalize;
+                &:visited{
+                    color: darkgreen;
+                }
+            }
+            &-info{
+                margin-left:2%;
+                width: 80%;
+                display: table;
+                // align-items: ce?nter;
+            }
+            &-price{
+                // display: table-cell;
+                width: 1%;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        }
+        &-container{
+            display: flex;
+        }
+        &-row{
+            padding:0 5%;
+            width: 50%;
+        }
+    }
+}
+.br-dot{
+    border-right: 3px dotted #151515;
+}

@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="/css/components/dish/related_dish.css">
+<div class="related-dish-container">
+    <%if(data.relatedDishes && data.relatedDishes.length > 0){%>
+        <div class="related-dish-title">
+            Related Dishes
+        </div>
+        <div class="related-dish-list">
+            <%let {relatedDishes,dish} = data%>
+            <%let range = relatedDishes.length>5?5:relatedDishes.length%>
+            <%for(let i = 0;i < range;i++){%>
+                <%if(relatedDishes[i].visible_id !== dish[0].visible_id){%>
+                <div class="related-dish-item">
+                    <a class="related-dish-image-container" style="background-image:url(/images/product-images/<%=relatedDishes[i].thumbnail%>)" href="/page/dish/<%=relatedDishes[i].visible_id%>">
+                    </a>
+                    <div class="related-dish-info-container">
+                        <a class="related-dish-info-title" href="/page/dish/<%=relatedDishes[i].visible_id%>">
+                            <%=relatedDishes[i].title%>
+                        </a>
+                        <div class="related-dish-info-price">
+                           $<%=relatedDishes[i].price*(100-relatedDishes[i].sale_percent)/100%>
+                        </div>
+                    </div>
+                </div>
+                <%}%>
+            <%}%>
+        </div>
+    <%}%>
+</div>

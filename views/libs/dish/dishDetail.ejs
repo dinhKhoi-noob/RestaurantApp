@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="/css/components/dish/dish_detail.css">
+<div class="dish-detail-container">
+    <%let {dish,relatedDishes} = data%>
+    <div class="dish-detail-dish-image-section">
+        <img src="/images/product-images/<%=dish[0].thumbnail%>" alt="thumbnail" class="dish-detail-dish-image">
+    </div>
+    <div class="dish-detail-info-container">
+        <div class="dish-detail-info-title">
+            <%=dish[0].title%>
+        </div>
+        <div class="dish-detail-info-price-section">
+            <%if(dish[0].sale_percent > 0){%>
+                <div class="dish-detail-info-price-sale">
+                    $<%=dish[0].price%>
+                </div>
+                <div class="dish-detail-info-price">
+                    $<%=dish[0].price*(100-dish[0].sale_percent)/100%>
+                </div>
+            <%}else{%>
+                <div class="dish-detail-info-price">
+                    $<%=dish[0].price%>
+                </div>
+            <%}%>
+        </div>
+        <div class="dish-detail-info-description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        </div>                                                                                                                                                                                                                                                                                                                                                                                                                   
+        <div class="dish-detail-info-transaction-section">
+            <div class="dish-detail-info-quantity-section">
+                Quantity:
+                <i class="fas fa-minus-circle quick-shopping-btn-decrease" id="quick-shopping-btn-decrease"></i>
+                <div class="product-quantity">
+                    <input type="text" value="1" class="dish-detail-info-input-quantity" id="dish-detail-info-input-quantity">
+                </div>
+                <i class="fas fa-plus-circle quick-shopping-btn-increase" id="quick-shopping-btn-increase"></i>
+            </div>
+            <button class="dish-detail-info-order-btn" id="quick-shopping-btn-increase__<%=dish[0].visible_id%>">
+                Order now
+            </button>
+        </div>
+    </div>
+</div>

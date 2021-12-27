@@ -1,0 +1,172 @@
+@-webkit-keyframes hide-order-list-animator{
+  from{
+    opacity: 1;
+    right: 1%;
+  }
+  to{
+    opacity: 0;
+    right: -50%;
+  }
+}
+@-webkit-keyframes show-order-list-animator{
+  from{
+    opacity: 0;
+    right: -50%;
+  }
+  to{
+    opacity: 1;
+    right: 1%;
+  }
+}
+
+@keyframes show-order-list-animator{
+  from{
+    opacity: 0;
+    right: -50%;
+  }
+  to{
+    opacity: 1;
+    right: 1%;
+  }
+}
+@keyframes hide-order-list-animator{
+  from{
+    opacity: 1;
+    right: 1%;
+  }
+  to{
+    opacity: 0;
+    right: -50%;
+  }
+}
+
+.order-list-empty{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.hide-order-list{
+  visibility: visible !important;
+  -webkit-animation-name: hide-order-list-animator;
+  animation-name: hide-order-list-animator;
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.show-order-list{
+  visibility: visible !important;
+  display: unset;
+  -webkit-animation-name: show-order-list-animator;
+  animation-name: show-order-list-animator;
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.order-list-container {
+  visibility: hidden;
+  background-color: white;
+  width: 600px;
+  position: absolute;
+  top: 160px;
+  right: 1%;
+  padding: 2% 1%;
+  box-shadow: 0 0 2px 0;
+  border-radius: 15px;
+}
+.order-list-close-btn{
+  font-size: 25px;
+  position: absolute;
+  right: 6%;
+  cursor: pointer;
+}
+.order-list-header {
+  text-align: center;
+  font-size: 30px;
+  color: darkgreen;
+  font-weight: bold;
+  height: 30px;
+  margin-bottom: 5%;
+}
+.order-list-table {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+.order-list-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  margin: 3% 0;
+  border-bottom: 1px solid;
+  padding-bottom: 3%;
+}
+.order-list-thumbnail {
+  width: 20%;
+  height: 130px;
+  background-size: cover;
+  background-position: center;
+}
+.order-list-title {
+  width: 30%;
+}
+.order-list-quantity-section {
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.order-list-quantity-input {
+  width: 30px;
+  text-align: center;
+}
+.order-list-price {
+  width: 10%;
+}
+.order-list-total-item-price {
+  width: 10%;
+}
+.order-list-footer {
+  display: flex;
+  flex-direction: column;
+}
+.order-list-total-section {
+  text-align: end;
+  line-height: 2rem;
+  padding: 0 5%;
+  width: 260px;
+  position: relative;
+  right: -45%;
+  margin: 5% 0;
+}
+.order-list-total-group {
+  display: flex;
+  justify-content: space-between;
+}
+.order-list-total-amount {
+  font-weight: bold;
+  font-size: 20px;
+}
+.order-list-redirect-btn {
+  text-align: center;
+  color: darkgreen;
+  font-weight: bold;
+  text-decoration: none;
+}
+.order-list-redirect-btn:visited {
+  color: darkgreen;
+}
+
+.h-30 {
+  height: 30px;
+}
+
+.text-left {
+  text-align: start;
+}
+
+/*# sourceMappingURL=order_list.css.map */

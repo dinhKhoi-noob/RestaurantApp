@@ -1,0 +1,64 @@
+.category-container {
+  display: flex;
+  padding: 1.5% 1%;
+  margin: 5% 3% 0% 3%;
+  border-bottom: 1px solid #456854;
+  width: 92%;
+  justify-content: space-between;
+}
+.category-button {
+  background-color: transparent;
+  color: #456854;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+}
+.category-list-container {
+  line-height: 2rem;
+}
+.category-list-container:hover .category-content-container {
+  visibility: visible;
+  max-height: 100%;
+  opacity: 1;
+}
+.category-list-container:hover .category-href {
+  visibility: visible;
+  max-height: 30%;
+  opacity: 1;
+}
+.category-content-container {
+  max-height: 0;
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  margin-right: 2%;
+  position: absolute;
+  z-index: 10;
+  background-color: #456854;
+  color: white;
+  flex-direction: column;
+  transition: max-height 1s;
+}
+.category-href {
+  color: white;
+  max-height: 0;
+  transition: 0.1s;
+  text-decoration: none;
+  padding-left: 5px;
+  padding-right: 20px;
+  border-bottom: 1px dotted white;
+}
+.category-href:visited {
+  color: white;
+}
+.category-href:hover {
+  color: #456854;
+  background-color: white;
+}
+
+.mb-10-p {
+  margin-bottom: 10%;
+}
+
+/*# sourceMappingURL=categories.css.map */

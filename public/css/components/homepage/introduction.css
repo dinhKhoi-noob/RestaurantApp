@@ -1,0 +1,62 @@
+#slideshow {
+  position: relative;
+}
+
+#slideshow > div {
+  position: absolute;
+}
+
+.introduction-container {
+  display: flex;
+  height: 500px;
+  text-align: center;
+  margin: 0 30px;
+}
+.introduction-section {
+  width: 44.5%;
+  position: relative;
+  left: 57.5%;
+  line-height: 1.6rem;
+  letter-spacing: 0.015rem;
+  padding: 50px 0px;
+}
+.introduction-section-title {
+  text-transform: center;
+  color: darkgreen;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.introduction-section-icon {
+  position: relative;
+  margin: 20px 0;
+}
+.introduction-section-text-subscription {
+  font-size: 14px;
+  padding: 0 40px;
+}
+
+.text-italic {
+  font-style: italic;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.font-30 {
+  font-size: 30px;
+}
+
+.font-40 {
+  font-size: 40px;
+}
+
+.mtb-20 {
+  margin: 20px 0;
+}
+
+.pd-lr-20 {
+  padding: 0 20px;
+}
+
+/*# sourceMappingURL=introduction.css.map */

@@ -1,0 +1,1 @@
+const toastContainer = document.querySelector('#order-dish-toast-container');

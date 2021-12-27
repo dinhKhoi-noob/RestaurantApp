@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="/css/components/homepage/book_table.css">
+<div class="book-table-container">
+    <div class="book-table-title">Book your table</div>
+    <div class="book-table-form-section">
+        <select name="booking-guest-number" id="guest-number" class="book-table-select-number-guest flex-item">
+            <option value="guest-1">1 Person</option>
+            <%for(let i = 1;i < 5;i++){ %>
+                <option value="guest-<%=Math.pow(2,i)%>">
+                    <%=Math.pow(2,i)%> People
+                </option>
+            <%}%>
+            <option value="guest-more-16 flex-item">> 16 People</option>
+        </select>
+        <select name="booking-floor" id="booking-floor" class="book-table-booking-floor flex-item">
+            <option value="ground-floor">Ground Floor</option>
+            <option value="first-floor">First Floor</option>
+            <option value="second-floor">Second Floor</option>
+            <option value="rooftop">Rooftop</option>
+        </select>
+        <input type="text" id="datepicker" autocomplete="off" class="book-table-booking-date flex-item datepicker-container openemr-calendar"  placeholder="Date">
+        <select name="booking-time" id="booking-time" class="book-table-booking-time flex-item datepicker">
+            <%for(let i = 7;i < 25;i++){ %>
+                <%for(let j = 0;j < 2;j++){%>
+                    <option value="<%=i%><%=j*30%>"><%=i%>:<%=j*30===0?'00':j*30%></option>
+                <%}%>
+            <%}%>
+        </select>
+        <button class="flex-item book-table-button">
+            Book
+        </button>
+    </div>
+</div>

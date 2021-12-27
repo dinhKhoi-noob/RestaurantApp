@@ -1,0 +1,77 @@
+.total-dish-found{
+    text-align: right;
+    font-size: 24px;
+    font-weight: bold;
+}
+.dish-result-element{
+    display: flex;
+    justify-content: space-between;
+    height: 200px;
+    padding: 30px 0;
+    border-bottom: 1px solid;
+    align-items: center;
+}
+.dish-result-thumbnail{
+    width: 30%;
+    background-size: cover;
+    height: 100%;
+    background-position: center;
+}
+.dish-result-interact-section{
+    width: 26%;
+    display: flex;
+    justify-content: space-between;
+}
+.dish-result-title{
+    width: 30%;
+    margin-left: 4%;
+    font-size: 22px;
+    color: darkgreen;
+}
+.dish-result-price-section{
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 35%;
+}
+.dish-result-sale-price{
+    font-size: 15px;
+    text-decoration: line-through;
+}
+.dish-result-price{
+    color: darkgreen;
+    font-size: 24px;
+}
+.dish-result-order-btn{
+    cursor: pointer;
+    background-color: darkgreen;
+    border: none;
+    padding: 20px 40px;
+    color: white;
+    font-size: 22px;
+}
+.dish-result-order-btn:hover{
+    background-color: white;
+    color: darkgreen;
+    transition: .5s;
+    box-shadow: 0 0 5px 0 darkgreen;
+}
+.dish-result-view-detail-btn:visited{
+    color: darkgreen;
+}
+.dish-result-view-detail-btn{
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid darkgreen;
+    padding: 20px 35px;
+    color: darkgreen;
+    font-size: 22px;
+    text-decoration: unset;
+}
+.dish-result-view-detail-btn:hover{
+    background-color: darkgreen;
+    transition: .5s;
+    box-shadow: 0 0 5px 0 darkgreen;
+    color: white;
+}

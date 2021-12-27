@@ -1,0 +1,39 @@
+#discount-slideshow { 
+    position: relative; 
+    // bottom:-10px; 
+}
+#discount-slideshow > div { 
+    position: absolute;
+}
+.discount-banner{
+    &-container{
+        display: flex;
+        width: 100%;
+        height: 350px;
+    }
+    &-slide{
+        &-section{
+            width: 50%;
+        }
+        &-element{
+            height: 100%;
+            width: 100%;
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    &-flex-element{
+        display: flex;
+        height: 50%;
+    }
+    &-element{
+        width: 50%;
+        background-position: center;
+        background-size: cover;
+    }
+    &-right-section{
+        width: 50%;
+    }
+}

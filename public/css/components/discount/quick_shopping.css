@@ -1,0 +1,229 @@
+.root-item {
+  background-color: darkgreen;
+  color: white !important;
+}
+.quick-shopping-bottom-section{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2%;
+  align-items: center;
+}
+.quick-shopping-input-section{
+  display: flex;
+  align-items: center;
+}
+.quick-shopping-input-field{
+  width: 50px;
+  direction: rtl;
+  font-size: 20px;
+}
+.quick-shopping {
+  border: 1px solid darkgreen;
+  text-align: center;
+  margin-top: 50px;
+  color: darkgreen;
+  padding: 10px;
+  font-size: 30px;
+  background-color: white;
+  font-family: "Inter", sans-serif;
+  width: 300px;
+  cursor: pointer;
+  text-transform: capitalize;
+  transition: 0.5s;
+}
+.quick-shopping:hover {
+  color: white;
+  background-color: darkgreen;
+}
+.quick-shopping-container {
+  width: 90%;
+  background-color: white;
+  height: 50%;
+  z-index: 100;
+  display: none;
+  position: fixed;
+  right: 5%;
+}
+.quick-shopping-title {
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: "Raleway", sans-serif;
+  color: darkgreen;
+  margin: 2% 0;
+}
+.quick-shopping-time-button {
+  position: absolute;
+  right: 3%;
+  top: 7%;
+  font-size: 35px;
+  cursor: pointer;
+}
+.quick-shopping-selector {
+  width: 20%;
+  font-size: 15px;
+  font-family: "Inter", sans-serif;
+  padding: 8px;
+  color: darkgreen;
+  background-color: white;
+  border: none;
+  border-radius: none;
+}
+.quick-shopping-selector-container {
+  margin: 2%;
+  border: 1px solid darkgreen;
+  display: flex;
+}
+.quick-shopping-request-category-list {
+  display: flex;
+  margin: 2%;
+  flex-wrap: wrap;
+}
+.quick-shopping-request-category-item {
+  display: inline;
+  padding: 4px 8px;
+  border: 1px solid darkgreen;
+  color: darkgreen;
+  border-radius: 10px;
+  margin: 1%;
+}
+.quick-shopping-view-result-btn {
+  padding: 10px;
+  color: white;
+  background-color: darkgreen;
+  font-size: 25px;
+  border: none;
+  cursor: pointer;
+  width: 200px;
+  font-family: "Inter", sans-serif;
+}
+.quick-shopping-bottom-element-notice {
+  padding: 4% 4% 0 4%;
+  color: red;
+  font-style: oblique;
+}
+.quick-shopping-bottom-element-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.quick-shopping-statistic-container {
+  width: 20%;
+  margin: 4% 5%;
+  line-height: 2.2rem;
+}
+.quick-shopping-statistic-total {
+  display: flex;
+  justify-content: space-between;
+}
+.quick-shopping-statistic-saving {
+  display: flex;
+  justify-content: space-between;
+}
+.quick-shopping-statistic-payment {
+  display: flex;
+  justify-content: space-between;
+}
+.quick-shopping-order-btn {
+  line-height: normal;
+  font-size: 25px;
+  height: 20%;
+  padding: 10px;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: none;
+  margin-right: 2.2%;
+}
+.quick-shopping-reset-btn {
+  padding: 10px 15px;
+  font-size: 25px;
+  color: white;
+  cursor: pointer;
+  background-color: black;
+  border: none;
+}
+
+.m-lr-5p {
+  margin: 0 5% !important;
+}
+
+.ov-scroll {
+  overflow-y: scroll;
+}
+
+.slide-in {
+  -webkit-animation-name: slidein;
+  animation-name: slidein;
+  -webkit-animation-duration: 0.6s;
+  animation-duration: 0.6s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.slide-out {
+  -webkit-animation-name: slideout;
+  animation-name: slideout;
+  -webkit-animation-duration: 0.6s;
+  animation-duration: 0.6s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.widen-section {
+  -webkit-animation-name: widen;
+  animation-name: widen;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.narrow-section {
+  -webkit-animation-name: narrow;
+  animation-name: narrow;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@keyframes slidein {
+  from {
+    top: -65%;
+  }
+  to {
+    top: 25%;
+  }
+}
+@keyframes slideout {
+  from {
+    top: 5%;
+  }
+  to {
+    top: -105%;
+  }
+}
+@keyframes widen {
+  from {
+    height: 50%;
+    top: 25%;
+  }
+  to {
+    height: 90%;
+    top: 5%;
+  }
+}
+@keyframes narrow {
+  from {
+    height: 90%;
+    top: 5%;
+  }
+  to {
+    height: 45%;
+    top: 25%;
+  }
+}
+
+/*# sourceMappingURL=quick_shopping.css.map */

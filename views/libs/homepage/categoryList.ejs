@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="/css/components/homepage/categories.css"/>
+<div class="category-header">
+    Our Category
+</div>
+<div class="category-container">
+    <%if(categories){%>
+        <%for(let i = 0;i < categories.length;i++){%>
+            <%if(categories[i].visible_id === categories[i].category_id){%>
+                <div class="category-list-container">
+                    <button class="category-button"><%=categories[i].title%></button>
+                    <div class="category-content-container">
+                        <a href="/page/category/<%=categories[i].visible_id%>?root=1" class="category-href">
+                            <%=categories[i].title%>
+                        </a>
+                        <%for(let j = 0;j < categories.length;j++){%>
+                            <%if(categories[i].visible_id === categories[j].category_id && categories[j].visible_id !== categories[j].category_id){%>
+                                <a class="category-href" href="/page/category/<%=categories[j].visible_id%>">
+                                    <%=categories[j].title%>
+                                </a>
+                            <%}%>
+                        <%}%>
+                    </div>
+                </div>
+            <%}%>
+        <%}%>
+    <%}%>
+</div>
+<div id="about-us" class="mb-10-p"></div>

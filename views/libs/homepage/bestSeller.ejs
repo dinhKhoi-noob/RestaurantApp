@@ -1,0 +1,19 @@
+<link rel="stylesheet" type="text/css" href="/css/components/homepage/best_seller.css"/>
+<div class="best-seller-container bg-<%=type%>">
+    <div class="product-header">
+        <% if(type==='party'){ %>
+        Hold on a party and have memorable moments
+        <%}else{%>
+            <%=type%>
+        <%}%>
+    </div>
+    <div class="best-seller-products-list">
+        <%- include('./productItem.ejs') %>
+        <%- include('./productItem.ejs') %>
+        <%- include('./productItem.ejs') %>
+        <%- include('./productItem.ejs') %>
+    </div>
+    <button class="best-seller-bot-btn">
+        <div class="inline-section">View more <i class="fas fa-arrow-right"></i></div>
+    </button>
+</div>

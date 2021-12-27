@@ -1,0 +1,92 @@
+.recipe-card-container {
+  width: 400px;
+  margin: 0 3%;
+  height: 250px;
+  transition: 0.5s;
+}
+.recipe-card-container:hover .recipe-card-background-color {
+  -webkit-animation-name: fadeIn8;
+  animation-name: fadeIn8;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  opacity: 0.8;
+}
+.recipe-card-container:hover .recipe-card-description {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  opacity: 1;
+}
+.recipe-card-title {
+  font-weight: bold;
+  font-size: 18px;
+}
+.recipe-card-description {
+  padding: 20px;
+  opacity: 0;
+  top: -500px;
+  position: relative;
+  color: wheat;
+  height: 210px;
+}
+.recipe-card-desc {
+  font-size: 13px;
+  text-align: center;
+  margin: 25px 0;
+  font-weight: lighter;
+}
+.recipe-card-subtitle {
+  color: wheat;
+  font-size: 15px;
+}
+.recipe-card-background {
+  position: relative;
+  height: 250px;
+  background-image: url("/images/recipes/pepperoni.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.recipe-card-background-color {
+  position: relative;
+  top: -250px;
+  background-color: #151515;
+  opacity: 0;
+  height: 250px;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeIn8 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+@keyframes fadeIn8 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+/*# sourceMappingURL=recipe_card.css.map */

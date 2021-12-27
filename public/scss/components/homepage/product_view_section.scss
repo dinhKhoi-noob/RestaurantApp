@@ -1,0 +1,121 @@
+.product-view{
+    &-close-button{
+        position: absolute;
+        top:20px;
+        right:20px;
+        background-color: white;
+        border-radius: 50%;
+        padding: 7px 7px 4px 7px;
+        border: 2px solid darkgreen;
+        cursor:pointer;
+    }
+    &-container{
+        display:none;
+        background-image: url("/images/thumbnails/bg1.jpg");
+        background-repeat:no-repeat;
+        background-position: center;
+        background-size: cover;
+        width: 70vw;
+        height:600px;
+        position: fixed;
+        top: 5vh;
+        left: 14vw;
+        z-index: 10;
+    }
+    &-description{
+        &-container{
+            background-color:white;
+            width:305px;
+            z-index:20;
+            padding: 30px;
+            line-height: 25px;
+            margin: 50px 100px 75px 200px;
+            border: 2px solid darkgreen;
+        }
+        &-desc{
+            font-size:13.5px;
+            margin: 30px 0;
+            letter-spacing:.025em;
+        }
+        &-name{
+            font-weight: bold;
+            font-size:20px;
+            color:darkgreen;
+        }
+        &-price{
+            color: darkgreen;
+            font-size: 22px;
+            font-weight: bold;
+            &-container{
+                display:flex;
+                margin-bottom:20px;
+                align-items:first baseline;
+            }
+            &-sale{
+                font-size:14px;
+                margin-left:10px;
+                text-decoration: line-through;
+            }
+        }
+        &-button{
+            &-add{
+                padding: 8px;
+                cursor:pointer;
+                font-size: 16px;
+                background-color: white;
+                border: 1px solid darkgreen;
+                color: darkgreen;
+                border-radius: 5px;
+                &:hover{
+                    color:white;
+                    background-color:darkgreen;
+                }
+            }
+            &-change{
+                &-value{
+                    width:50px;
+                    height:20px;
+                    margin-right:10px;
+                }
+                &-decrease{
+                    line-height:0px;
+                    cursor: pointer;
+                }
+                &-increase{
+                    line-height:0px;
+                    cursor: pointer;
+                }
+                &-group{
+                    display: flex;
+                    align-items:center;
+                }
+            }
+            &-group{
+                display:flex;
+                margin-top:40px;
+                justify-content: space-between;
+            }
+            &-arrow-group{
+            }
+        }
+    }
+    &-container::before{
+        background-color:wheat;
+        position: absolute;
+        opacity: 0.3;
+        content: "";
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+    }
+    &-thumbnail{
+        &-image{
+            width:300px;
+            height:200px;
+            position: relative;
+            top: 160px;
+            left: 100px;
+        }
+    }
+}

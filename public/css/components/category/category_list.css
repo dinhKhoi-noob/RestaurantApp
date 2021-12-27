@@ -1,0 +1,39 @@
+.category-list-container {
+  width: 13%;
+  line-height: 1.8rem;
+  padding: 3%;
+  box-shadow: 0 0 5px 0 #151515;
+  max-height: 1080px;
+}
+.category-list-item-root {
+  font-size: 20px;
+  font-weight: bold;
+  color: darkgreen;
+  margin: 2% 0;
+  cursor: pointer;
+}
+.category-list-item:visited {
+  color: darkgreen;
+}
+.category-list-item-component {
+  font-size: 17px;
+  color: darkgreen;
+  margin-left: 15%;
+  cursor: pointer;
+  text-decoration: none;
+}
+.category-list-navigator {
+  color: darkgreen;
+  text-decoration: none;
+}
+.category-list-navigator:visited {
+  color: darkgreen;
+}
+.category-list-navigator-root {
+  color: darkgreen;
+}
+.category-list-navigator-root:visited {
+  color: darkgreen;
+}
+
+/*# sourceMappingURL=category_list.css.map */

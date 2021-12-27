@@ -1,0 +1,51 @@
+.related-dish{
+    &-title{
+        font-size: 40px;
+        text-align: center;
+        font-family: 'Raleway',san-serif;
+        margin: 150px 0;
+    }
+    &-container{
+        display: flex;
+        width: 100%;
+        text-align: center;
+        flex-direction: column;
+    }
+    &-list{
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+    }
+    &-item{
+        width: 20%;
+        margin:0 1%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    &-image-container{
+        height: 200px;
+        width: 100%;
+        background-position: center;
+        background-size: cover;
+    }
+    &-info{
+        &-title{
+            font-size: 25px;
+            text-decoration: none;
+            color:black;
+            text-transform: capitalize;
+            font-family: 'Raleway',sans-serif;
+            margin: 20px 0;
+            &:visited{
+                color:black;
+            }
+        }
+        &-container{
+            padding: 20px;
+        }
+        &-price{
+            font-size: 18px;
+        }
+    }
+}

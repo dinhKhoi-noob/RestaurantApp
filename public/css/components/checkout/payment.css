@@ -1,0 +1,60 @@
+.width-48-p {
+  width: 48%;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mt-40 {
+  margin-top: 40px !important;
+}
+
+.payment-input {
+  padding: 10px;
+  font-size: 20px;
+  font-family: "Inter", sans-serif;
+}
+.payment-input:focus {
+  box-shadow: none;
+}
+.payment-container {
+  width: 38%;
+  font-size: 20px;
+}
+.payment-title {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+.payment-btn {
+  background-color: transparent;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: "Inter", sans-serif;
+  border: 1px solid #151515;
+  cursor: pointer;
+}
+.payment-btn-reset {
+  background-color: yellow;
+  border: none;
+  transition: 0.5s;
+}
+.payment-btn-order {
+  background-color: darkgreen;
+  color: white;
+  border: none;
+  transition: 0.5s;
+}
+.payment-row {
+  display: flex;
+  margin: 20px 0;
+  justify-content: space-between;
+}
+.payment-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/*# sourceMappingURL=payment.css.map */

@@ -1,0 +1,55 @@
+<link rel="stylesheet" href="/css/components/layouts/header.css" type="text/css">
+<div class="header-container">
+    <div class="header">
+        <div class="header-top-element">
+            <div class="header-contact">
+                <div class="header-contact-phone" style="color:white"></div>
+                <div class="header-contact-email" style="color: white"></div>
+            </div>
+            <div class="header-spacing"></div>
+            <div class="header-navigation">
+                <div class="header-navigation-blog" style="color: white"></div>
+                <!-- <div class="header-navigation-about"></div> -->
+            </div>
+        </div>
+        <div class="header-customer-navigation">
+            <a href="/page/index" class="header-customer-navigation-logo"><img src="/images/icons/logo.jpg" alt="logo" style="width:180px;height:180px"/></a>
+            <div class="header-customer-navigation-search">
+                <select id="category-dropdown-filter" name="search-selector" class="header-customer-navigation-search-dropdown">
+                    <option selected class="option-dropdown-root-option" value="all">
+                        All categories
+                    </option>
+                    <%const {categories}=data%>
+                    <%for(let i = 0;i < categories.length;i++){%>
+                        <%if(categories[i].visible_id === categories[i].category_id){%>
+                            <option value="<%=categories[i].visible_id%>" class="option-dropdown-root-option">
+                                <%=categories[i].title%>
+                            </option>
+                            <%for(let j = 0;j < categories.length;j++){%>
+                                <%if(categories[j].category_id === categories[i].visible_id && categories[j].category_id !== categories[j].visible_id){%>
+                                    <option value="<%=categories[j].visible_id%>" class="option-dropdown-option">
+                                        <%=categories[j].title%>
+                                    </option>
+                                <%}%>
+                            <%}%>
+                        <%}%>
+                    <%}%>
+                </select>
+                <div class="header-customer-navigation-search-bar">
+                    <input type=text id="search-category-input" class="header-customer-navigation-search-bar-input" placeholder="Search">
+                    <a class="header-customer-navigation-search-bar-button" id="search-bar-btn"><img src="/images/icons/search.svg"></a>
+                </div>
+            </div>
+            <div class="header-customer-navigation-container">
+                <div class="header-customer-navigation-profile">
+                    <img style="width:30px" class="header-customer-navigation-profile-btn" src="/images/icons/person.svg">
+                    
+                </div>   
+                <div class="header-customer-navigation-cart" id="header-customer-navigation-cart">
+                    <img class="header-customer-navigation-cart-btn" id="header-customer-navigation-cart-btn" src="/images/icons/bag.svg"/>
+                </div>
+                <%- include('./orderList.ejs') %>
+            </div>
+        </div>
+    </div>
+</div>

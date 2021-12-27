@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="/css/components/category/category_list.css"/>
+<div class="category-list-container">
+    <%for(let i=0;i < categories.length;i++){ %>
+        <%if(categories[i].category_id === categories[i].visible_id){%>
+            <div class="category-list-item-root">
+                <a href="/page/category/<%=categories[i].visible_id%>?root=1" class="category-list-navigator-root">
+                    <%=categories[i].title%>
+                </a>
+            </div>
+            <%for(let j=0;j < categories.length;j++){%>
+                <%if(categories[j].category_id === categories[i].visible_id && categories[j].visible_id !== categories[j].category_id){%>
+                    <div class="category-list-item-component">
+                        <a href="/page/category/<%=categories[j].visible_id%>" class="category-list-navigator">
+                            <%=categories[j].title%>
+                        </a>
+                    </div>
+                <%}%>
+            <%}%>
+        <%}%>
+    <%}%>
+</div>

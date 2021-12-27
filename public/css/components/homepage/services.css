@@ -1,0 +1,43 @@
+.services-container {
+  background-color: #456854;
+  height: 550px;
+  padding: 30px 20px;
+  text-align: center;
+  color: white;
+  margin: 100px 30px;
+  letter-spacing: 0.015rem;
+}
+.services-title {
+  font-size: 35px;
+  color: yellowgreen;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.services-subscription {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 25px 240px;
+  line-height: 1.6rem;
+}
+.services-list {
+  display: flex;
+}
+.services-item {
+  text-align: center;
+  padding: 20px;
+}
+.services-item-title {
+  color: yellowgreen;
+  font-size: 30px;
+  margin: 30px 0;
+  text-transform: uppercase;
+}
+.services-item-subtitle {
+  line-height: 1.5rem;
+}
+
+.font-italic {
+  font-style: italic;
+}
+
+/*# sourceMappingURL=services.css.map */

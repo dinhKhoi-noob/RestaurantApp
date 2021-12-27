@@ -1,0 +1,83 @@
+.navigation-bar{
+    &-container{
+        display: flex;
+        padding:0 40px;
+        position: fixed;
+        height: 53.95px;
+        top:0;
+        width: 100%;
+        z-index: 100;
+        margin-top:-200px;
+        left: 0;
+        background-color: #456854;
+        color:white;
+        box-shadow: 0 0 5px 0 #151515;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &-logo-section{
+        width: 40%;
+        font-size: 40px;
+    }
+    &-logo{
+        width: 20%;
+    }
+    &-navigate{
+        &-section{
+            display: flex;
+            width: 40%;
+        }
+        &-item{
+            text-decoration: none;
+            color:white;
+            margin:0 3%;
+            &:visited{
+                color: white;
+            }
+        }
+    }
+    &-user-section{
+        display: flex;
+        justify-content: space-around;
+        width: 10%;
+    }
+    &-search-section{
+        width: 3%;
+    }
+}
+.navigation-slide-in{
+    -webkit-animation-name: top-slide-in;
+    animation-name: top-slide-in;
+    -webkit-animation-duration:   .6s;
+    animation-duration:   .6s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+.navigation-slide-out{
+    -webkit-animation-name: top-slide-out;
+    animation-name: top-slide-out;
+    -webkit-animation-duration:   .6s;
+    animation-duration:   .6s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+@keyframes top-slide-in{
+    from{
+        margin-top:-200px;
+        opacity: 0;
+    }
+    to{
+        margin-top:0;
+        opacity: 1;
+    }
+}
+@keyframes top-slide-out{
+    from{
+        margin-top:0;
+        opacity: 1;
+    }
+    to{
+        margin-top:-200px;
+        opacity: 0;
+    }
+}

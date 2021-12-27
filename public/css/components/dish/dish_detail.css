@@ -1,0 +1,65 @@
+.dish-detail-container {
+  display: flex;
+}
+.dish-detail-info-container {
+  width: 50%;
+  padding: 0 40px;
+  line-height: 2rem;
+}
+.dish-detail-info-title {
+  font-size: 40px;
+  text-transform: capitalize;
+  margin-bottom: 50px;
+  font-family: "Raleway", sans-serif;
+}
+.dish-detail-info-transaction-section {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 70px;
+}
+.dish-detail-info-quantity-section {
+  display: flex;
+  padding: 10px;
+  border: 1px solid darkgreen;
+  width: 30%;
+  justify-content: space-between;
+  align-items: center;
+}
+.dish-detail-info-input-quantity {
+  width: 30px;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+}
+.dish-detail-info-price {
+  font-size: 30px;
+  color: darkgreen;
+}
+.dish-detail-info-price-section {
+  margin-bottom: 30px;
+}
+.dish-detail-info-price-sale {
+  font-size: 14px;
+  text-decoration: line-through;
+}
+.dish-detail-info-order-btn {
+  background-color: white;
+  border: 1px solid darkgreen;
+  padding: 20px;
+  font-size: 20px;
+  color: darkgreen;
+  transition: 0.6s;
+}
+.dish-detail-info-order-btn:hover {
+  color: white;
+  background-color: darkgreen;
+}
+.dish-detail-dish-image {
+  width: 100%;
+  max-height: 700px;
+  object-fit: cover;
+}
+.dish-detail-dish-image-section {
+  width: 50%;
+}
+
+/*# sourceMappingURL=dish_detail.css.map */

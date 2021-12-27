@@ -1,0 +1,110 @@
+.order-list{
+    &-container{
+        background-color: white;
+        width: 600px;
+        position: absolute;
+        top: 160px;
+        right: 1%;
+        padding: 2% 1%;
+        box-shadow: 0 0 2px 0;
+        border-radius: 15px;
+    }
+    &-header{
+        text-align: center;
+        font-size: 30px;
+        color: darkgreen;
+        font-weight: bold;
+        height: 30px;
+        margin-bottom: 5%;
+    }
+    &-table{
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+    &-card{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: center;
+        margin: 3% 0;
+        border-bottom: 1px solid;
+        padding-bottom: 3%;
+    }
+    &-thumbnail{
+        width: 20%;
+        height: 130px;
+        background-size: cover;
+        background-position: center;
+    }
+    &-title{
+        width: 30%;
+    }
+    &-quantity-section{
+        width: 15%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &-btn{
+        &-decrease{
+
+        }
+        &-increase{
+
+        }
+    }
+    &-quantity{
+        &-input{
+            width: 30px;
+            text-align: center;
+        }
+    }
+    &-price{
+        width: 10%;
+    }
+    &-total-item-price{
+        width: 10%;
+
+    }
+    &-footer{
+        display: flex;
+        flex-direction: column;
+    }
+    &-total{
+        &-section{
+            text-align: end;
+            line-height: 2rem;
+            padding: 0 5%;
+            width: 260px;
+            position: relative;
+            right: -45%;
+            margin:5% 0;
+        }
+        &-group{
+            display: flex;
+            justify-content: space-between;
+        }
+        &-items{
+
+        }
+        &-amount{
+            font-weight: bold;
+            font-size: 20px;
+        }
+    }
+    &-redirect-btn{
+        text-align: center;
+        color: darkgreen;
+        font-weight: bold;
+        text-decoration: none;
+        &:visited{
+            color:darkgreen;
+        }
+    }
+}
+.h-30{
+    height: 30px;
+}
+.text-left{
+    text-align: start;
+}

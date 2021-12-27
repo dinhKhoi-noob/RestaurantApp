@@ -1,0 +1,27 @@
+.discount-sale-list{
+    &-container{
+        // height: 80%;
+        display: flex;
+        flex-direction: column;
+    }
+    &-column{
+        display: flex;
+        align-items: stretch    ;
+        height: 25%;
+        margin: 2% 0;
+    }
+    &-element{
+        width: 25%;
+        // height: 100%;
+        margin:0 2%;
+        box-shadow: 0 0 5px 0 #151515;
+        &-thumbnail{
+            width: 100%;
+            height: 200px;
+        }
+        &-info-container{
+            text-align: center;
+            padding:15px;
+        }
+    }
+}

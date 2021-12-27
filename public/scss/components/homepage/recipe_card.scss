@@ -1,0 +1,87 @@
+.recipe-card{
+    &-container{
+        width: 400px;
+        margin:0 3%;
+        height:250px;
+        transition:.5s;
+        // position: absolute;
+        &:hover{
+            .recipe-card-background-color{
+                -webkit-animation-name: fadeIn8;
+                animation-name: fadeIn8;
+                -webkit-animation-duration: 1s;
+                animation-duration: 1s;
+                opacity: .8;
+                // -webkit-animation-fill-mode: both;
+                // animation-fill-mode: both;
+            }
+            .recipe-card-description{
+                -webkit-animation-name: fadeIn;
+                animation-name: fadeIn;
+                -webkit-animation-duration: 1s;
+                animation-duration: 1s;
+                opacity: 1;
+                // -webkit-animation-fill-mode: both;
+                // animation-fill-mode: both;
+            }
+        }
+    }
+    &-title{
+        font-weight: bold;
+        font-size:18px;
+    }
+    &-description{
+        // visibility:hidden;
+        padding:20px;
+        // transition: all 1s;
+        opacity:0;
+        top: -500px;
+        position: relative;
+        color: wheat;
+        height: 210px;
+    }
+    &-desc{
+        font-size: 13px;
+        text-align: center;
+        margin: 25px 0;
+        font-weight: lighter;
+    }
+    &-subtitle{
+        color: wheat;
+        font-size: 15px;
+    }
+    &-background{
+        position: relative;
+        height:250px;
+        background-image:url('/images/recipes/pepperoni.jpg');
+        background-repeat:no-repeat;
+        background-size: cover;
+        background-position:center;
+        &-color{
+            // transition: all 1s;
+            position: relative;
+            top:-250px;
+            background-color: #151515;
+            opacity: 0;
+            height:250px;
+        }
+    }
+}
+@-webkit-keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+ 
+@keyframes fadeIn {
+    0% {opacity: 0;}
+100% {opacity: 1;}
+}
+@-webkit-keyframes fadeIn8 {
+    0% {opacity: 0;}
+    100% {opacity: .8;}
+}
+ 
+@keyframes fadeIn8 {
+    0% {opacity: 0;}
+100% {opacity: .8;}
+}

@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="/css/components/discount/quick_shopping.css"/>
+<link rel="stylesheet" href="/css/components/checkout/order_item_list.css"/>
+<div class="quick-shopping-container ov-scroll" id="quick-shopping-container">
+    <div class="quick-shopping-title">
+        Quick order
+    </div>
+    <div id="quick-shopping-time-button" class="quick-shopping-time-button">
+        <i class="fa fa-times"></i>
+    </div>
+    <div class="quick-shopping-selector-container">
+        <%for(let i = 0;i < categories.length;i++){%>
+            <%if(categories[i].visible_id === categories[i].category_id){%>
+                <select name="quick-shopping-selector" id="quick-shopping-selector" class="quick-shopping-selector">
+                    <%for(let j=0;j < categories.length;j++){%>
+                        <%if(categories[j].category_id===categories[i].visible_id){%>
+                            <option value="<%=categories[j].visible_id%>_<%=categories[j].category_id%>-<%=categories[j].title%>" class="quick-shopping-choice">
+                                <%=categories[j].title%>
+                            </option>
+                        <%}%>
+                    <%}%>
+                </select>
+            <%}%>
+        <%}%>
+    </div>
+    <div class="quick-shopping-request-category-list" id="quick-shopping-request-category-list">
+    </div>
+    <div class="quick-shopping-bottom-section">
+        <div class="quick-shopping-input-section">
+            <strong class="quick-shopping-input-title">
+                Limit around:
+            </strong>
+            <input type="text" id="quick-shopping-input-field" value="0" class="quick-shopping-input-field">
+            $
+        </div>
+        <button class="quick-shopping-view-result-btn" id="quick-shopping-view-result-btn">
+            View result
+        </button>
+    </div>
+    <div id="advice-list">
+    </div>
+    <div id="normal-dishes-list">
+    </div>
+    <div class="quick-shopping-bottom-element" id="quick-shopping-bottom-element">
+    </div>
+</div>

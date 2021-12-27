@@ -1,0 +1,43 @@
+.slide-fade-container {
+  position: absolute;
+  max-width: 1000px;
+  margin-left: -50px;
+  top: -50px;
+  z-index: 0;
+}
+.slide-fade-element {
+  display: none;
+  -webkit-animation-name: fade4;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade4;
+  animation-duration: 1.5s;
+}
+.slide-fade-element-thumbnail {
+  width: 100vw;
+  vertical-align: middle;
+}
+@-webkit-keyframes fade4 {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade4 {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.slide-fade-background {
+  position: relative;
+  background-color: black;
+  opacity: 0.6;
+  width: 100vw;
+  top: -100vw;
+}
+
+/*# sourceMappingURL=advertisement_slide.css.map */

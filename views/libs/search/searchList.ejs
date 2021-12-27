@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="/css/components/search/search_list.css">
+<%const {searchResult} = data%>
+<div class="total-dish-found">
+    Found total <div style="display: inline;color: red;"><%=searchResult.length%></div> <%=(searchResult.length === 1 || searchResult === 0)?"result":"results"%>
+</div>
+<%for(let i = 0;i < searchResult.length;i++){%>
+    <div class="dish-result-element">
+        <div class="dish-result-thumbnail" id="dish-result-thumbnail__<%=searchResult[i].visible_id%>" style="background-image:url('/images/product-images/<%=searchResult[i].thumbnail%>')">
+
+        </div>
+        <div class="dish-result-title" id="dish-result-title__<%=searchResult[i].visible_id%>">
+            <%=searchResult[i].title%>
+        </div>
+        <div class="dish-result-price-section">
+            <%if(searchResult[i].sale_percent > 0){%>
+                <div class="dish-result-sale-price">
+                    $<%=searchResult[i].price%>
+                </div>
+            <%}%>
+            <div class="dish-result-price" id="dish-result-price__<%=searchResult[i].visible_id%>">
+                $<%=searchResult[i].price*(100-searchResult[i].sale_percent)/100%>
+            </div>
+        </div>
+        <div class="dish-result-interact-section">
+            <button class="dish-result-order-btn" id="dish-result-order-btn__<%=searchResult[i].visible_id%>">
+                Order
+            </button>
+            <a class="dish-result-view-detail-btn" id="dish-result-view-detail-btn__<%=searchResult[i].visible_id%>" href="/page/dish/<%=searchResult[i].visible_id%>">
+                View Detail
+            </a>
+        </div>
+    </div>
+<%}%>

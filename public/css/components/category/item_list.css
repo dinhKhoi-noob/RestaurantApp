@@ -1,0 +1,11 @@
+.item-list-container {
+  width: 87%;
+  text-align: center;
+  padding: 2%;
+}
+
+.box-shadow-5 {
+  box-shadow: 0 0 5px 0 #151515;
+}
+
+/*# sourceMappingURL=item_list.css.map */

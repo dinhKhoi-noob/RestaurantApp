@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="/css/components/category/item_list.css"/>
+<div class="item-list-container">
+    <%for(let i = 0;i < Math.round(products.length/3);i++){%>
+    <%let range = 3 >= products.length-i*3?products.length-i*3:3%>
+        <div class="product-list-column">
+            <%for(let j = 0;j < range;j++){%>
+            <div class="product-list-element box-shadow-5">
+                <img src="/images/product-images/<%=products[i*3+j].thumbnail%>" alt="thumbnail" class="product-list-element-thumbnail">
+                <div class="product-list-element-info-container pd-rlb-5-p">
+                    <div class="product-title">
+                        <%=products[i*3+j].title%>
+                    </div>
+                    <div class="product-desc">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                    </div>
+                    <div class="product-buy-section justify-space-between">
+                        <div class="product-price-container">
+                            <%if(products[i*3+j].sale_percent){%>
+                                <div class="product-price-real">
+                                    <%=products[i*3+j].sale_percent%>
+                                </div>
+                                <div class="product-price-sale">
+                                    <%=products[i*3+j].price*(100-products[i*3+j].sale_percent)/100%>
+                                </div>
+                            <%}else{%>
+                                <div class="product-price-sale">
+                                    <%=products[i*3+j].price%>
+                                </div>
+                            <%}%>
+                        </div>
+                        <a class="product-buy-btn" href="/page/dish/<%=products[i*3+j].visible_id%>">
+                            Order now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <%}%>
+        </div>
+        <%}%>
+</div>

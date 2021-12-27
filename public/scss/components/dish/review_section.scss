@@ -1,0 +1,74 @@
+.ml-20-p{
+    margin-left: 20%;
+}
+.mr-20-p{
+    margin-right: 20%;
+}
+.border-bot{
+    border-bottom: 1px solid darkgreen;
+}
+.review-section{
+    &-container{
+        border:1px solid darkgreen;
+        line-height: 2rem;
+        padding:5% 10%;
+        margin: 5% 0;
+    }
+    &-title{
+        cursor: pointer;
+        // border-bottom: 1px solid darkgreen;
+        &-container{
+            font-size: 25px;
+            font-weight: bold;
+            font-family: "Raleway",sans-serif;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom:5%;
+        }
+    }
+    &-description{
+        text-align: center;
+        // padding:0 10%;
+    }
+    &-additional{
+        &-section{
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            // justify-content: center;
+        }
+        &-title{
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        &-flex{
+            display: flex;
+            // justify-content: space-between;
+        }
+    }
+    &-review{
+        &-container{
+            display: none;
+        }
+        &-card{
+            border: 1px solid #151515;
+            padding: 20px;
+            margin:2% 0;
+        }
+        &-reviewer{
+            &-email{
+                font-size: 20px;
+                font-weight: bold;
+                color: darkgreen;
+            }
+            &-comment{
+                padding: 0 20px;
+            }
+            &-date{
+                font-size: 14px;
+                font-weight: bold;
+                text-align: end;
+            }
+        }
+    }
+}

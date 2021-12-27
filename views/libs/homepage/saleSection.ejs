@@ -1,0 +1,135 @@
+<link rel="stylesheet" href="/css/components/homepage/sale_section.css"/>
+<div class="sale-section-container">
+	<div class="sale-section-title">
+		On sale
+	</div>
+	<div class="sale-section-product-list">
+		<% let images=['bbq.jpg','cupcake.jpg','france-dishes-1.jpg','spaghetti.jpg','italia-dishes-1.jpg','lamb-red-wine.jpg','red-wine.jpg','sashimi.png'] %>
+		<% for (let i=0;i < 2;i++){ %>
+		<div class="sale-section-product-pair">
+			<%if(products[i*4]){%>
+				<div class="sale-section-product shorter-div top-element-<%=i*2+1%> transition-5"
+				style="background-image: url('/images/product-images/<%=products[i*4].thumbnail%>');">
+					<div class="sale-section-product-tag">
+						-<%=products[i*4].sale_percent%>%
+					</div>
+					<div class="sale-section-product-info-container">
+						<div class="sale-section-product-name">
+							<%=products[i*4].title%>
+						</div>
+						<div class="sale-section-product-desc">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						</div>
+						<div class="flex-section justify-space-between pd-rl-20">
+							<div class="flex-section flex-column">
+								<div class="sale-section-product-price">
+									<%=products[i*4].price%>
+								</div>
+								<div class="sale-section-product-price-sale">
+									<%=products[i*4].price * (100-products[i*4].sale_percent)/100%>
+								</div>
+							</div>
+							<a class="sale-section-product-button" href="/page/dish/<%=products[i*4].visible_id%>">
+								Order now
+							</a>
+						</div>
+					</div>
+				</div>
+			<%}%>
+			<%if(products[i*4+1]){%>
+				<div class="sale-section-product higher-div bot-element-<%=i*2+1%> transition-5"
+				style="background-image: url('/images/product-images/<%=products[i*4+1].thumbnail%>');">
+					<div class="sale-section-product-tag">
+						-<%=products[i*4+1].sale_percent%>%
+					</div>
+					<div class="sale-section-product-info-container">
+						<div class="sale-section-product-name">
+							<%=products[i*4+1].title%>
+						</div>
+						<div class="sale-section-product-desc">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						</div>
+						<div class="flex-section justify-space-between pd-rl-20">
+							<div class="flex-section flex-column">
+								<div class="sale-section-product-price">
+									<%=products[i*4+1].price%>
+								</div>
+								<div class="sale-section-product-price-sale">
+									<%=products[i*4+1].price * (100 - products[i*4+1].sale_percent)/100%>
+								</div>
+							</div>
+							<a class="sale-section-product-button" href="/page/dish/<%=products[i*4+1].visible_id%>">
+								Order now
+							</a>
+						</div>
+					</div>
+				</div>
+			<%}%>
+		</div>
+		<div class="sale-section-product-pair">
+			<%if(products[i*4+2]){%>
+				<div class="sale-section-product higher-div top-element-<%=i*2+2%> transition-5"
+				style="background-image: url('/images/product-images/<%=products[i*4+2].thumbnail%>');">
+					<div class="sale-section-product-tag">
+						-<%=products[i*4+2].sale_percent%>%
+					</div>
+					<div class="sale-section-product-info-container">
+						<div class="sale-section-product-name">
+							<%=products[i*4+2].title%>
+						</div>
+						<div class="sale-section-product-desc">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						</div>
+						<div class="flex-section justify-space-between pd-rl-20">
+							<div class="flex-section flex-column">
+								<div class="sale-section-product-price">
+									<%=products[i*4+2].sale_percent%>
+								</div>
+								<div class="sale-section-product-price-sale">
+									<%=products[i*4+2].price * (100 - products[i*4+2].sale_percent)/100%>
+								</div>
+							</div>
+							<a class="sale-section-product-button" href="/page/dish/<%=products[i*4+2].visible_id%>">
+								Order now
+							</a>
+						</div>
+					</div>
+				</div>
+			<%}%>
+			<%if(products[i*4+3]){%>
+			<div class="sale-section-product shorter-div bot-element-<%=i*2+2%> transition-5"
+			style="background-image: url('/images/product-images/<%=products[i*4+3].thumbnail%>');">
+				<div class="sale-section-product-tag">
+					-<%=products[i*4+3].sale_percent%>%
+				</div>
+				<div class="sale-section-product-info-container">
+					<div class="sale-section-product-name">
+						<%=products[i*4+3].title%>
+					</div>
+					<div class="sale-section-product-desc">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					</div>
+					<div class="flex-section justify-space-between pd-rl-20">
+						<div class="flex-section flex-column">
+							<div class="sale-section-product-price">
+								<%=products[i*4+3].price%>
+							</div>
+							<div class="sale-section-product-price-sale">
+								<%=products[i*4+3].price * (100 - products[i*4+3].sale_percent)/100%>
+							</div>
+						</div>
+						<a class="sale-section-product-button" href="/page/dish/<%=products[i*4+3].visible_id%>">
+							Order now
+						</a>
+					</div>
+				</div>
+			</div>
+			<%}%>
+		</div>
+		<%}%>
+	</div>
+	<div class="sale-section-bot-btn-container">
+		<a href="/page/discount" class="sale-section-bot-btn inline-section">View more <i class="fas fa-arrow-right"></i></a>
+		<div id="main-dishes"></div>
+	</div>
+</div>

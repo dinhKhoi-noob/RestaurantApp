@@ -1,0 +1,405 @@
+.sale-section-title {
+  font-family: "Raleway", sans-serif;
+  font-size: 50px;
+  font-weight: bold;
+  margin: 50px auto;
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: bold;
+  color: white;
+  width: 30%;
+  background-color: #456854;
+  clip-path: polygon(8% 0, 100% 0%, 92% 100%, 0% 100%);
+}
+.sale-section-container {
+  padding: 0 40px;
+  margin-bottom: 200px;
+  height: 49.5rem;
+}
+.sale-section-product {
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+  z-index: 5;
+  position: relative;
+  transition: 0.6s;
+}
+.sale-section-product::before {
+  display: none;
+  background-color: #f5f5f5;
+  position: absolute;
+  z-index: 10;
+  opacity: 0.8;
+  content: "";
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+.sale-section-product:hover::before {
+  display: unset;
+}
+.sale-section-product-tag {
+  padding: 19px 6px;
+  position: absolute;
+  right: 5%;
+  z-index: 20;
+  border-radius: 50%;
+  background-color: darkgreen;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+.sale-section-product-name {
+  text-align: center;
+  font-size: 40px;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  margin: 60px 0;
+  color: darkgreen;
+}
+.sale-section-product-list {
+  display: flex;
+  margin: auto;
+}
+.sale-section-product-desc {
+  text-align: center;
+}
+.sale-section-product-pair {
+  transition: 0.5s;
+  width: 40%;
+  position: relative;
+  height: 600px;
+}
+.sale-section-product-info-container {
+  position: relative;
+  visibility: hidden;
+  z-index: 20;
+  line-height: 1.5rem;
+}
+.sale-section-product-price {
+  font-size: 15px;
+  text-decoration: line-through;
+}
+.sale-section-product-price-sale {
+  font-size: 30px;
+  font-weight: bold;
+  color: darkgreen;
+}
+.sale-section-product-button {
+  border: none;
+  box-shadow: 0 0 5px 0 darkgreen;
+  font-size: 20px;
+  display: flex;
+  color: darkgreen;
+  text-decoration: none;
+  align-items: center;
+  padding: 15px;
+}
+.sale-section-product-button:visited {
+  color: darkgreen;
+}
+.sale-section-product-button:hover {
+  background-color: darkgreen;
+  transition: 0.3s;
+  color: white;
+}
+.sale-section-bot-btn {
+  padding: 20px;
+  color: darkgreen;
+  font-size: 30px;
+  border: 1px solid darkgreen;
+  font-weight: bold;
+  text-decoration: none;
+}
+.sale-section-bot-btn-container {
+  position: relative;
+  bottom: -20%;
+}
+.sale-section-bot-btn:hover {
+  color: white;
+  background-color: darkgreen;
+  transform: translate(0px, -10px);
+}
+
+.flex-section {
+  display: flex;
+}
+
+.inline-section {
+  display: inline;
+}
+
+.shorter-div {
+  height: 40%;
+}
+
+.higher-div {
+  height: 60%;
+}
+
+.bot-element-2 {
+  position: absolute;
+}
+
+.bot-element-4 {
+  position: absolute;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes mb {
+  0% {
+    margin-bottom: -90%;
+  }
+  100% {
+    margin-bottom: 20%;
+  }
+}
+@keyframes mb {
+  0% {
+    margin-bottom: -90%;
+  }
+  100% {
+    margin-bottom: 20%;
+  }
+}
+.sale-section-product-pair:hover .top-element-2 {
+  height: 35%;
+  transition-delay: 0.4s;
+}
+
+.sale-section-product-pair .top-element-2:hover {
+  height: 65%;
+  transition-delay: 0.4s;
+}
+.sale-section-product-pair .top-element-2:hover .sale-section-product-desc {
+  -webkit-animation-name: mb;
+  animation-name: mb;
+  -webkit-animation-duration: 1.2s;
+  animation-duration: 1.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.sale-section-product-pair .top-element-2:hover .sale-section-product-info-container {
+  visibility: visible;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  transition: 0.6s;
+  -webkit-animation-duration: 1.2s;
+  animation-duration: 1.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.sale-section-product-pair:hover .bot-element-2 {
+  height: 35%;
+  transition-delay: 0.4s;
+}
+
+.sale-section-product-pair .bot-element-2:hover {
+  transition-delay: 0.4s;
+  height: 65%;
+}
+.sale-section-product-pair .bot-element-2:hover .sale-section-product-desc {
+  -webkit-animation-name: mb;
+  animation-name: mb;
+  -webkit-animation-duration: 1.2s;
+  animation-duration: 1.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.sale-section-product-pair .bot-element-2:hover .sale-section-product-info-container {
+  visibility: visible;
+  -webkit-animation-name: fadeIn;
+  transition: 0.6s;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 1.2s;
+  animation-duration: 1.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.sale-section-product-pair:hover .top-element-4 {
+  height: 35%;
+  transition-delay: 0.4s;
+}
+
+.sale-section-product-pair .top-element-4:hover {
+  height: 65%;
+  transition-delay: 0.4s;
+}
+.sale-section-product-pair .top-element-4:hover .sale-section-product-desc {
+  -webkit-animation-name: mb;
+  animation-name: mb;
+  -webkit-animation-duration: 1.2s;
+  animation-duration: 1.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.sale-section-product-pair .top-element-4:hover .sale-section-product-info-container {
+  visibility: visible;
+  transition: 0.6s;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 1.2s;
+  animation-duration: 1.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.sale-section-product-pair:hover .bot-element-4 {
+  height: 35%;
+  transition-delay: 0.4s;
+}
+
+.sale-section-product-pair .bot-element-4:hover {
+  height: 65%;
+  transition-delay: 0.4s;
+}
+.sale-section-product-pair .bot-element-4:hover .sale-section-product-desc {
+  -webkit-animation-name: mb;
+  animation-name: mb;
+  -webkit-animation-duration: 1.2s;
+  animation-duration: 1.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.sale-section-product-pair .bot-element-4:hover .sale-section-product-info-container {
+  visibility: visible;
+  transition: 0.6s;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 1.2s;
+  animation-duration: 1.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.sale-section-product-pair:hover .bot-element-1 {
+  height: 35%;
+  transition-delay: 0.4s;
+}
+
+.sale-section-product-pair .bot-element-1:hover {
+  height: 65%;
+  transition-delay: 0.4s;
+}
+.sale-section-product-pair .bot-element-1:hover .sale-section-product-desc {
+  -webkit-animation-name: mb;
+  animation-name: mb;
+  -webkit-animation-duration: 1.2s;
+  animation-duration: 1.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.sale-section-product-pair .bot-element-1:hover .sale-section-product-info-container {
+  visibility: visible;
+  transition: 0.6s;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 1.2s;
+  animation-duration: 1.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.sale-section-product-pair:hover .top-element-1 {
+  height: 35%;
+  transition-delay: 0.4s;
+}
+
+.sale-section-product-pair .top-element-1:hover {
+  height: 65%;
+  transition-delay: 0.4s;
+}
+.sale-section-product-pair .top-element-1:hover .sale-section-product-desc {
+  -webkit-animation-name: mb;
+  animation-name: mb;
+  -webkit-animation-duration: 1.2s;
+  animation-duration: 1.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.sale-section-product-pair .top-element-1:hover .sale-section-product-info-container {
+  visibility: visible;
+  transition: 0.6s;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 1.2s;
+  animation-duration: 1.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.sale-section-product-pair:hover .bot-element-3 {
+  height: 35%;
+  transition-delay: 0.4s;
+}
+
+.sale-section-product-pair .bot-element-3:hover {
+  height: 65%;
+  transition-delay: 0.4s;
+}
+.sale-section-product-pair .bot-element-3:hover .sale-section-product-desc {
+  -webkit-animation-name: mb;
+  animation-name: mb;
+  -webkit-animation-duration: 1.2s;
+  animation-duration: 1.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.sale-section-product-pair .bot-element-3:hover .sale-section-product-info-container {
+  visibility: visible;
+  transition: 0.6s;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 1.2s;
+  animation-duration: 1.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.sale-section-product-pair:hover .top-element-3 {
+  height: 35%;
+  transition-delay: 0.4s;
+}
+
+.sale-section-product-pair .top-element-3:hover {
+  height: 65%;
+  transition-delay: 0.4s;
+}
+.sale-section-product-pair .top-element-3:hover .sale-section-product-desc {
+  -webkit-animation-name: mb;
+  animation-name: mb;
+  -webkit-animation-duration: 1.2s;
+  animation-duration: 1.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.sale-section-product-pair .top-element-3:hover .sale-section-product-info-container {
+  visibility: visible;
+  transition: 0.6s;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 1.2s;
+  animation-duration: 1.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+/*# sourceMappingURL=sale_section.css.map */

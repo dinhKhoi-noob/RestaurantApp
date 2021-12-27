@@ -1,0 +1,172 @@
+@keyframes dish-narrow{
+  from{
+    opacity: 1;
+    height: 100px;
+  }
+  to{
+    opacity: 0;
+    height: 0;
+  }
+}
+
+@-webkit-keyframes dish-narrow{
+  from{
+    opacity: 1;
+    height: 100px;
+  }
+  to{
+    opacity: 0;
+    height: 0;
+  }
+}
+
+@keyframes normal-list-narrow{
+  from{
+    opacity: 1;
+    height: 195px;
+  }
+  to{
+    opacity: 0;
+    height: 0;
+  }
+}
+
+@-webkit-keyframes normal-list-narrow{
+  from{
+    opacity: 1;
+    height: 195px;
+  }
+  to{
+    opacity: 0;
+    height: 0;
+  }
+}
+
+@keyframes hide-total-section{
+  from{
+    opacity: 1;
+  }
+  to{
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes hide-total-section{
+  from{
+    opacity: 1;
+  }
+  to{
+    opacity: 0;
+  }
+}
+
+.hide-total-section{
+  -webkit-animation-name: hide-total-section;
+  animation-name: hide-total-section;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.order-item-row-narrow{
+  -webkit-animation-name: dish-narrow;
+  animation-name: dish-narrow;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.order-item-normal-list-narrow{
+  -webkit-animation-name: normal-list-narrow;
+  animation-name: normal-list-narrow;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.order-item-list-empty-notification{
+  text-align:center;
+  font-size:24px;
+}
+
+.total-section{
+  display:flex;
+  align-items:center;
+}
+
+.item-row {
+  display: flex;
+  margin: 5% 0;
+  padding-bottom: 3%;
+}
+
+.order-item-info {
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  width: 80%;
+  text-align: center;
+}
+
+.order-item-title{
+  width: 45%;
+}
+
+.order-item-price{
+  width: 15%;
+}
+
+.order-item-total{
+  width: 15%;
+}
+
+.order-item-remove{
+  width: 10%;
+}
+
+.order-btn-decrease{
+  font-size: 15px;
+}
+
+.order-btn-increase{
+  font-size: 15px;
+}
+.product-quantity{
+  width: 30px;
+  text-align: center;
+}
+.order-item-list-container {
+  width: 58%;
+}
+.order-item-list-row {
+  width: 100%;
+  border-bottom: 1px solid #151515;
+  height: 100px;
+}
+.order-item-quantity-group-title{
+  width: 15%;
+}
+.order-item-quantity-group {
+  display: flex;
+  width: 15%;
+  justify-content: space-around;
+  padding: 5px;
+  border-bottom: 1px solid #777;
+  font-size: 16px;
+  align-items: center;
+}
+.order-item-thumbnail{
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+.height-50-p{
+  height: 50px;
+}
+.font-18-p{
+  font-size: 18px;
+}
+/*# sourceMappingURL=order_item_list.css.map */

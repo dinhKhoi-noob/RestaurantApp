@@ -1,0 +1,371 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bonheur+Royale&family=Raleway:wght@200&display=swap");
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: "Inter", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes show{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+@keyframes hide{
+  from{
+    opacity: 1;
+  }
+  to{
+    opacity: 0;
+  }
+}
+
+@keyframes tooltip-scale{
+  from{
+    opacity: 0;
+    height: 0;
+    width: 0;
+  }
+  to{
+    opacity: 1;
+    height: 20px;
+    width: 120px;
+  }
+}
+
+@-webkit-keyframes tooltip-scale{
+  from{
+    opacity: 0;
+    height: 0;
+    width: 0;
+  }
+  to{
+    opacity: 1;
+    height: 20px;
+    width: 120px;
+  }
+}
+
+@keyframes tooltip-narrow{
+  from{
+    opacity: 1;
+    height: 20px;
+    width: 120px;
+  }
+  to{
+    opacity: 0;
+    height: 0;
+    width: 0;
+  }
+}
+
+@-webkit-keyframes tooltip-narrow{
+  from{
+    opacity: 1;
+    height: 20px;
+    width: 120px;
+  }
+  to{
+    opacity: 0;
+    height: 0;
+    width: 0;
+  }
+}
+
+@keyframes btn-slide-in{
+  from{
+    opacity: 0;
+    right: -5%;
+  }
+  to{
+    opacity: 1;
+    right: 5%;
+  }
+}
+
+@-webkit-keyframes btn-slide-in{
+  from{
+    opacity: 0;
+    right: -5%;
+  }
+  to{
+    opacity: 1;
+    right: 5%;
+  }
+}
+
+@keyframes btn-slide-out{
+  from{
+    opacity: 1;
+    right: 5%;
+  }
+  to{
+    opacity: 0;
+    right: -5%;
+  }
+}
+
+@-webkit-keyframes btn-slide-out{
+  from{
+    opacity: 1;
+    right: 5%;
+  }
+  to{
+    opacity: 0;
+    right: -5%;
+  }
+}
+
+.order-list-btn-section{
+  position: fixed;
+  z-index: 1000;
+  bottom: 150px;
+  right: 50px;
+  display: flex;
+  flex-direction: column;
+  visibility: hidden;
+  justify-content: end;
+  width: 100px;
+  align-items: center;
+}
+
+.show-order-list-btn{
+  cursor: pointer;
+  box-shadow:0 0 5px 0 black;
+  background-color: white;
+  border: none;
+  padding: 20px 30px;
+  border-radius: 100%;
+  transition-delay: .5s;
+  font-size: 30px;
+  color: #456854;
+}
+.show-order-list-btn:hover{
+  background-color: #456854;
+  color: white;
+}
+.btn-tooltip{
+  opacity: 0;
+  background-color: #456854;
+  clip-path: polygon(50% 0%, 100% 23%, 100% 100%, 0 100%, 0 23%);
+  padding: 15px;
+  box-shadow:0 0 5px 0 black;
+  text-align: center;
+  height: 0px;
+  width: 0px;
+  color: white;
+  border-radius: 10px;
+}
+
+.display-tooltip{
+  transition-delay: 1s;
+  -webkit-animation-name: tooltip-scale;
+  animation-name: tooltip-scale;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.hide-tooltip{
+  transition-delay: 1s;
+  -webkit-animation-name: tooltip-narrow;
+  animation-name: tooltip-narrow;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.show-btn{
+  visibility: visible !important;
+  -webkit-animation-name: btn-slide-in;
+  animation-name: btn-slide-in;
+  -webkit-animation-duration: 0.6s;
+  animation-duration: 0.6s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.hide-btn{
+  -webkit-animation-name: btn-slide-out;
+  animation-name: btn-slide-out;
+  -webkit-animation-duration: 0.6s;
+  animation-duration: 0.6s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.bottom-50{
+  bottom: 50px;
+}
+
+.discount-body {
+  padding: 0 40px;
+  margin: 3% 0;
+  flex-direction: column;
+}
+
+.category-body {
+  display: flex;
+  padding: 0 40px;
+  margin: 3% 0;
+}
+
+.dish-body {
+  display: flex;
+  flex-direction: column;
+  padding: 0 40px;
+  margin: 3% 0;
+}
+.checkout-body {
+  display: flex;
+  padding: 0 40px;
+  margin: 3% 0;
+  justify-content: space-between;
+}
+
+.category-header {
+  text-align: center;
+  color: darkgreen;
+  font-size: 40px;
+  margin: 5% 0;
+  font-family: "Raleway", sans-serif;
+}
+
+.dishes-title {
+  font-family: "Raleway", sans-serif;
+  text-align: center;
+  font-size: 50px;
+  text-transform: capitalize;
+  font-weight: bold;
+  color: white;
+  width: 30%;
+  background-color: #456854;
+  margin: auto;
+  clip-path: polygon(8% 0, 100% 0%, 92% 100%, 0% 100%);
+}
+
+.product-header {
+  font-size: 50px;
+  position: relative;
+  z-index: 20;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  color: #456854;
+  margin: 100px 30px;
+  text-align: center;
+  text-transform: capitalize;
+}
+.product-title {
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 30px;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  margin: 20px 0;
+  color: darkgreen;
+}
+.product-desc {
+  font-size: 15px;
+  font-style: italic;
+  margin-bottom: 30px;
+}
+.product-buy-section {
+  display: flex;
+}
+.product-buy-btn {
+  cursor: pointer;
+  padding: 15px;
+  text-decoration: none;
+  border: 1px solid darkgreen;
+  color: darkgreen;
+  font-size: 20px;
+}
+
+.product-buy-btn:hover{
+  color: white;
+  background-color: darkgreen;
+}
+
+.product-price-real {
+  text-decoration: line-through;
+  font-size: 15px;
+}
+.product-price-sale {
+  font-size: 30px;
+  color: darkgreen;
+}
+.product-list-column {
+  display: flex;
+  justify-content: center;
+}
+.product-list-element {
+  margin: 1%;
+  width: 33%;
+}
+.product-list-element-thumbnail {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.pseudo-main-dishes {
+  margin-top: 100px;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-section {
+  display: flex;
+}
+
+.pd-rl-20 {
+  padding: 0 20px;
+}
+
+.pd-rlb-5-p {
+  padding: 0 5% 5% 5%;
+}
+
+.mw-18-p {
+  max-width: 18%;
+}
+
+.w-18-p {
+  width: 18%;
+}
+
+.w-100-p {
+  width: 100%;
+}
+
+.w-10-p {
+  width: 10%;
+}
+
+.pd-tb-3-p {
+  padding: 3% 0;
+}
+
+.height-auto {
+  height: auto !important;
+}
+
+.w-25-p {
+  width: 25%;
+}
+
+/*# sourceMappingURL=main.css.map */

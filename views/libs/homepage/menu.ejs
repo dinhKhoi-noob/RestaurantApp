@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="/css/components/homepage/menu.css"/>
+<div class="menu-container" style="background-image: url('/images/thumbnails/bg-<%=type%>.jpg');">
+    <div class="menu-title">
+        <%=type%>
+    </div>
+    <div class="menu-list-container">
+        <%let dish = data[type]%>
+        <%for(let i = 0;i < 2;i++){%>
+            <div class="menu-list-row <%=i===0?'br-dot':''%>">
+                <%for(let j = 0;j < 4;j++){%>
+                    <div class="menu-list-item">
+                        <div class="menu-list-item-image" style="background-image: url('/images/product-images/<%=dish[i*4+j].thumbnail%>');"></div>
+                        <div class="menu-list-item-info">
+                            <a class="menu-list-item-title" href="/page/dish/<%=dish[i*4+j].visible_id%>"><%=dish[i*4+j].title%></a>
+                            <div class="menu-list-item-dot"></div>
+                            <div class="menu-list-item-price">$<%=dish[i*4+j].price*(100-dish[i*4+j].sale_percent)/100%></div>
+                        </div>
+                    </div>
+                <%}%>
+            </div>
+        <%}%>
+    </div>
+</div>
