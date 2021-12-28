@@ -63,11 +63,11 @@ route.post('/register',userMiddleware.registerMiddleware,async(req,res)=>{
             }
         })
         const bcrypt = require('bcryptjs');
-        const {username,password,email,address,phone} = req.body;
+        const {username,password,email} = req.body;
         const salt = await bcrypt.genSalt(10);
         const passwordHashed = await bcrypt.hash(password,salt);
         const visibleId = randomString.generate(10);
-        let query = `insert into users (visible_id,username,password,email,address,phone) values('${visibleId}','${username}','${passwordHashed}','${email}','${address}','${phone}')`;
+        let query = `insert into users (visible_id,username,password,email) values('${visibleId}','${username}','${passwordHashed}','${email}')`;
         connection.query(query,(err,result) => {
             if(result){
                 jwt.sign({

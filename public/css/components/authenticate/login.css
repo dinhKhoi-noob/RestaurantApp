@@ -362,3 +362,8 @@
     top: 10px;
     cursor: pointer;
 }
+
+.password-notification{
+    font-size: 12px;
+    font-style: italic;
+}

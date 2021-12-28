@@ -65,18 +65,21 @@
                     <label for="register-username" class="form-label">Username</label>
                     <div class="inline-input-section">
                         <input type="text" id="register-username" class="form-input input-full-width" placeholder="Username">
-                        <i class="fas fa-exclamation-circle icon-toggle" style="color:red"></i>
+                        <i class="fas fa-exclamation-circle icon-toggle" id="register-username-exclamation" style="color:red"></i>
                     </div>
                 </div>
                 <div class="form-element flex-column">
                     <label for="register-email" class="form-label">Email</label>
                     <div class="inline-input-section">
                         <input type="text" id="register-email" class="form-input input-full-width" placeholder="Eg: example@eg.com">
-                        <i class="fas fa-exclamation-circle icon-toggle" style="color:red"></i>
+                        <i class="fas fa-exclamation-circle icon-toggle" id="register-email-exclamation" style="color:red"></i>
                     </div>
                 </div>
                 <div class="form-element flex-column">
                     <label for="register-password" class="form-label">Password</label>
+                    <p class="password-notification" id="password-notification">
+                        (Password no less than 8 characters, and contain at least 1 number, 1 lowercase character and 1 uppercase character).
+                    </p>
                     <div class="inline-input-section">
                         <input type="password" id="register-password" class="form-input input-full-width" placeholder="Your password">
                         <i class="far fa-eye-slash icon-toggle" id="password-toggle"></i>

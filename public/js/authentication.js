@@ -1,4 +1,4 @@
-const registerEmailInput = document.querySelector('#register-username');
+const registerEmailInput = document.querySelector('#register-email');
 const registerUsernameInput = document.querySelector('#register-username');
 const registerPasswordInput = document.querySelector('#register-password');
 const registerConfirmPasswordInput = document.querySelector('#register-confirm-password');
@@ -20,17 +20,22 @@ const backToAuthBtn = document.querySelector('#slash-page-btn');
 const googleLoginBtns = document.querySelectorAll('.form-google-login');
 const facebookLoginBtns = document.querySelectorAll('.form-facebook-login');
 
-let confirmPasswordText;
+let confirmPasswordText = registerConfirmPasswordInput.value?registerConfirmPasswordInput.value:"";
 
 const newUser = {
-    username:"",
-    email:"",
-    password:"",
+    username:registerUsernameInput.value?registerUsernameInput.value:"",
+    email:registerEmailInput.value?registerEmailInput.value:"",
+    password:registerPasswordInput.value?registerPasswordInput.value:"",
 }
 
 const loginUser = {
-    email:"",
-    password:""
+    email:loginEmailInput.value?loginEmailInput.value:"",
+    password:loginPasswordInput.value?loginPasswordInput.value:""
+}
+
+const isValidPassword = (password) => {
+    const samplePassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+    return samplePassword.test(password);
 }
 
 const isValidEmail = (email) => {
@@ -42,12 +47,14 @@ const showToast = (content) => {
     const notificationToastContainer = document.querySelector('#notification-toast-container');
     const notificationToastContent = document.querySelector('#notification-toast-content');
     notificationToastContent.innerHTML = content;
-    notificationToastContainer.classList.remove('toast-slide-out');
     notificationToastContainer.classList.add('toast-slide-in','width-240');
+    notificationToastContainer.classList.remove('toast-slide-out');
     setTimeout(()=>{
-        notificationToastContainer.classList.remove('toast-slide-in','width-240');
         notificationToastContainer.classList.add('toast-slide-out');
-        notificationToastContainer.style.visibility = 'hidden !important';
+        setTimeout(()=>{
+            notificationToastContainer.classList.remove('toast-slide-in','width-240');
+            notificationToastContainer.style.visibility = 'hidden !important';
+        },1000)
     },3000)
 }
 
@@ -190,12 +197,14 @@ loginSubmit.addEventListener('submit',(event)=>{
     if(loginUser.password === "" || !loginUser.password){
         loginPasswordInput.style.border = '1px solid #ed3b3b';
         loginPasswordInput.style.color = '#ed3b3b';
+        loginPasswordEyeToggle.style.color = '#ed3b3b';
         showToast('Please enter all required field !');
         return;
     }
     else{
         loginPasswordInput.style.border = '1px solid black';
         loginPasswordInput.style.color = 'black';
+        loginPasswordEyeToggle.style.color = 'black';
     }
     fetch('http://localhost:4000/api/auth/login',{
         method:'POST',
@@ -211,9 +220,6 @@ loginSubmit.addEventListener('submit',(event)=>{
         }
     })
     .then(content=>{
-        if(content.status === 401){
-            showToast('Invalid email address or password');
-        }
         if(content.status === 201){
             authPage.classList.add('section-hide');
             setTimeout(()=>{
@@ -233,16 +239,102 @@ loginSubmit.addEventListener('submit',(event)=>{
         .then(response=>response.json())
         .then(result=>{window.location.href = `http://localhost:4000/page/index?uid=${result.user.visible_id}`})
         .catch(err=>{
-            console.log(err)
+            console.log(err);
+            showToast('Invalid email or password');
         });
     })
     .catch(err=>{
-        console.log(err)
+        console.log(err);
+        showToast('Invalid email or password');
     })
 })
 
 registerSection.addEventListener('submit',(event)=>{
     event.preventDefault();
+    const passwordNotificationText = document.querySelector('#password-notification');
+    const usernameExclamation = document.querySelector('#register-username-exclamation');
+    const emailExlamation = document.querySelector('#register-email-exclamation');
+    const {username,password,email} = newUser;
+    const isEqualPassword = password === confirmPasswordText;
+    if( email === "" || !email){
+        emailExlamation.style.visibility = 'visible';
+        registerEmailInput.style.color = '#ed3b3b';
+        registerEmailInput.style.border = '1px solid #ed3b3b';
+        showToast('Please enter all required field');
+        return;
+    }
+    else{
+        emailExlamation.style.visibility = 'hidden';
+        registerEmailInput.style.color = 'black';
+        registerEmailInput.style.border = '1px solid';
+    }
+
+    if(username === "" || !username){
+        usernameExclamation.style.visibility = 'visible';
+        registerUsernameInput.style.color = '#ed3b3b';
+        registerUsernameInput.style.border = '1px solid #ed3b3b';
+        showToast('Please enter all required field');
+        return;
+    }
+    else{
+        usernameExclamation.style.visibility = 'hidden';
+        registerUsernameInput.style.color = 'black';
+        registerUsernameInput.style.border = '1px solid';
+    }
+
+    if(password === "" || !password || !isValidPassword(password)){
+        showToast('Invalid password!');
+        registerPasswordInput.style.color = '#ed3b3b';
+        registerPasswordInput.style.border = '1px solid #ed3b3b';
+        passwordNotificationText.style.color = '#ed3b3b';
+        passwordEyeToggle.style.color = '#ed3b3b';
+        return;
+    }
+    else{
+        registerPasswordInput.style.color = 'black';
+        registerPasswordInput.style.border = '1px solid';
+        passwordNotificationText.style.color = 'black';
+        passwordEyeToggle.style.color = 'black';
+    }
+
+    if(confirmPasswordText === "" || !confirmPasswordText || !isEqualPassword){
+        isEqualPassword?showToast('Please enter all required field'):showToast('Password is not equal');
+        registerConfirmPasswordInput.style.color = '#ed3b3b';
+        registerConfirmPasswordInput.style.border = '1px solid #ed3b3b';
+        confirmPasswordEyeToggle.style.color = '#ed3b3b';
+        return;
+    }
+    else{
+        registerConfirmPasswordInput.style.color = 'black';
+        registerConfirmPasswordInput.style.border = '1px solid';
+        confirmPasswordEyeToggle.style.color = 'black';
+    }
+
+    fetch('http://localhost:4000/api/auth/register',{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify(newUser)
+    })
+    .then(response => {
+        const result = {};
+        response.json().then(data=>{
+            result.data = data
+        })
+        result.status = response.status;
+        return result;
+    })
+    .then(result => {
+        console.log(result['data']);
+        // console.log(result.data,result.data.message)
+        // if(result.status === 403){
+        //     showToast(result.data.message)
+        // }
+    })
+    .catch(err=>{
+        console.log(err);
+    })
 })
 
 backToAuthBtn.addEventListener('click',()=>{
