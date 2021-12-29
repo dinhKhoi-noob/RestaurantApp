@@ -19,6 +19,7 @@ const authPage = document.querySelector('#login-section-container');
 const backToAuthBtn = document.querySelector('#slash-page-btn');
 const googleLoginBtns = document.querySelectorAll('.form-google-login');
 const facebookLoginBtns = document.querySelectorAll('.form-facebook-login');
+const spinner = document.querySelector('#spinner-container');
 
 let confirmPasswordText = registerConfirmPasswordInput.value?registerConfirmPasswordInput.value:"";
 
@@ -31,6 +32,24 @@ const newUser = {
 const loginUser = {
     email:loginEmailInput.value?loginEmailInput.value:"",
     password:loginPasswordInput.value?loginPasswordInput.value:""
+}
+
+const firstTimeRenderAuthPage = () => {
+    loginSection.classList.add('login-content-slide-in');
+    banner.classList.add('login-thumbnail-show');
+}
+
+const displaySpinner = (isShow) => {
+    isShow === true ? 
+    (()=>{
+        spinner.style.visibility = 'visible';
+        authPage.style.opacity = 0.1;
+    })()
+    :
+    (()=>{
+        spinner.style.visibility = 'hidden';
+        authPage.style.opacity = 1;
+    })()
 }
 
 const isValidPassword = (password) => {
@@ -206,6 +225,7 @@ loginSubmit.addEventListener('submit',(event)=>{
         loginPasswordInput.style.color = 'black';
         loginPasswordEyeToggle.style.color = 'black';
     }
+    displaySpinner(true);
     fetch('http://localhost:4000/api/auth/login',{
         method:'POST',
         headers:{
@@ -221,6 +241,9 @@ loginSubmit.addEventListener('submit',(event)=>{
     })
     .then(content=>{
         if(content.status === 201){
+            displaySpinner(false);
+            loginEmailInput.value = "";
+            loginPasswordInput.value = "";
             authPage.classList.add('section-hide');
             setTimeout(()=>{
                 authPage.classList.remove('section-show');
@@ -237,13 +260,20 @@ loginSubmit.addEventListener('submit',(event)=>{
             }
         })
         .then(response=>response.json())
-        .then(result=>{window.location.href = `http://localhost:4000/page/index?uid=${result.user.visible_id}`})
+        .then(result=>{
+            displaySpinner(false);
+            loginPasswordInput.value = "";
+            loginEmailInput.value = "";
+            window.location.href = `http://localhost:4000/page/index?uid=${result.user.visible_id}`
+        })
         .catch(err=>{
-            console.log(err);
+            displaySpinner(false);
             showToast('Invalid email or password');
+            console.log(err);
         });
     })
     .catch(err=>{
+        displaySpinner(false);
         console.log(err);
         showToast('Invalid email or password');
     })
@@ -309,7 +339,7 @@ registerSection.addEventListener('submit',(event)=>{
         registerConfirmPasswordInput.style.border = '1px solid';
         confirmPasswordEyeToggle.style.color = 'black';
     }
-
+    displaySpinner(true);
     fetch('http://localhost:4000/api/auth/register',{
         method:'POST',
         headers:{
@@ -317,22 +347,26 @@ registerSection.addEventListener('submit',(event)=>{
         },
         body:JSON.stringify(newUser)
     })
-    .then(response => {
-        const result = {};
-        response.json().then(data=>{
-            result.data = data
-        })
-        result.status = response.status;
-        return result;
-    })
+    .then(response => response.json())
     .then(result => {
-        console.log(result['data']);
-        // console.log(result.data,result.data.message)
-        // if(result.status === 403){
-        //     showToast(result.data.message)
-        // }
+        displaySpinner(false)
+        if(!result.success){
+            showToast(result.message);
+            return;
+        }
+        registerConfirmPasswordInput.value = "";
+        registerPasswordInput.value = "";
+        registerEmailInput.value = "";
+        registerUsernameInput.value = "";
+        authPage.classList.add('section-hide');
+        setTimeout(()=>{
+            authPage.classList.remove('section-show');
+            slashPage.classList.add('section-show');
+            slashPage.classList.remove('section-hide');
+        },1000);
     })
     .catch(err=>{
+        displaySpinner(false);
         console.log(err);
     })
 })
@@ -345,3 +379,5 @@ backToAuthBtn.addEventListener('click',()=>{
         authPage.classList.remove('section-hide');
     },1000)
 })
+
+firstTimeRenderAuthPage();

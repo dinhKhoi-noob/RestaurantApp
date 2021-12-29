@@ -1,63 +1,34 @@
-const _checkoutListBtn = document.querySelector('#header-customer-navigation-cart-btn');
-const _orderList = document.querySelector('#order-list-container');
-const _scrollToTopBtn = document.querySelector("#scroll-to-top-btn");
-const _openOrderListBtn = document.querySelector("#show-order-list-btn");
-const _scrollToTopBtnTooltip = document.querySelector("#scroll-top-btn-tooltip");
-const _openOrderListBtnTooltip = document.querySelector('#order-list-btn-tooltip');
+const checkoutListBtn = document.querySelector('#header-customer-navigation-cart-btn');
+const orderList = document.querySelector('#order-list-container');
+const scrollToTopBtn = document.querySelector("#scroll-to-top-btn");
+const openOrderListBtn = document.querySelector("#show-order-list-btn");
+const scrollToTopBtnTooltip = document.querySelector("#scroll-top-btn-tooltip");
+const openOrderListBtnTooltip = document.querySelector('#order-list-btn-tooltip');
 
-let accessToken;
-
-fetch('http://localhost:4000/api/auth/login',{
-  method:'POST',
-  headers:{
-    'Content-Type':'application/json'
-  },
-  body:JSON.stringify({
-    'email':'khoip2k3@gmail.com',
-    'password':'123456'
-  })
-})
-.then(response=>response.headers)
-.then(headers=>{
-  accessToken = headers.get('Authorization')
-  fetch('http://localhost:4000/api/auth/verify',{
-    method:'POST',
-    headers:{
-      'Authorization':`Bearer ${accessToken}`
-    }
-  })
-  .then(response=>response.json())
-  // .then(result=>{window.location.search = `uid=${result.user.visible_id}`})
-  .catch(err=>{console.log(err)});
-})
-.catch(err=>{
-  console.log(err)
+scrollToTopBtn.addEventListener('mouseover',()=>{
+  scrollToTopBtnTooltip.classList.add("display-tooltip");
+  scrollToTopBtnTooltip.classList.remove("hide-tooltip");
 })
 
-_scrollToTopBtn.addEventListener('mouseover',()=>{
-  _scrollToTopBtnTooltip.classList.add("display-tooltip");
-  _scrollToTopBtnTooltip.classList.remove("hide-tooltip");
+scrollToTopBtn.addEventListener('mouseleave',()=>{
+  scrollToTopBtnTooltip.classList.remove("display-tooltip");
+  scrollToTopBtnTooltip.classList.add("hide-tooltip");
 })
 
-_scrollToTopBtn.addEventListener('mouseleave',()=>{
-  _scrollToTopBtnTooltip.classList.remove("display-tooltip");
-  _scrollToTopBtnTooltip.classList.add("hide-tooltip");
+openOrderListBtn.addEventListener('mouseover',()=>{
+  openOrderListBtnTooltip.classList.add("display-tooltip");
+  openOrderListBtnTooltip.classList.remove("hide-tooltip");
 })
 
-_openOrderListBtn.addEventListener('mouseover',()=>{
-  _openOrderListBtnTooltip.classList.add("display-tooltip");
-  _openOrderListBtnTooltip.classList.remove("hide-tooltip");
+openOrderListBtn.addEventListener('mouseleave',()=>{
+  openOrderListBtnTooltip.classList.remove("display-tooltip");
+  openOrderListBtnTooltip.classList.add("hide-tooltip");
 })
 
-_openOrderListBtn.addEventListener('mouseleave',()=>{
-  _openOrderListBtnTooltip.classList.remove("display-tooltip");
-  _openOrderListBtnTooltip.classList.add("hide-tooltip");
-})
-
-_checkoutListBtn.addEventListener('click',()=>{
-  _orderList.style.display = 'unset';
-  _orderList.classList.remove("hide-order-list");
-  _orderList.classList.add("show-order-list");
+checkoutListBtn.addEventListener('click',()=>{
+  orderList.style.display = 'unset';
+  orderList.classList.remove("hide-order-list");
+  orderList.classList.add("show-order-list");
 })
 
 
