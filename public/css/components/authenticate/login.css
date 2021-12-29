@@ -84,7 +84,7 @@
 
 @keyframes right-slide-in{
     from{
-        left: -10%;
+        left: 10%;
         opacity: 0;
     }
     to{
@@ -212,6 +212,48 @@
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
 }
+.from-left-btn{
+    transition: 1.2s;
+}
+.from-left-btn:hover::before{
+    transition-delay: .15s;
+}
+.from-left-btn:hover::after{
+    background-color: darkgreen;
+    transition-delay: .15s ;
+}
+
+.from-left-btn:hover{
+    color: darkgreen;
+    border:1px solid darkgreen;
+    border-radius: 0;
+    transition-delay: .3s;
+}
+.from-left-btn:before,
+.from-left-btn:after {
+    content: '';
+	position: absolute;	
+	transition: inherit;
+	z-index: -1;
+	top: 0;
+	width: 0;
+	height: 100%;
+}
+
+.from-left-btn:before {
+	right: 0;
+}
+
+.from-left-btn:after {
+	left: 0;
+}
+
+.from-left-btn:hover:before,
+.from-left-btn:hover:after {
+	width: 100%;
+    background-color: white;
+}
+
 
 .register-section-content{
     display: none;
@@ -273,7 +315,7 @@
     justify-content: space-between;
     margin: 1rem 0 1.5rem 0;
 }
-.form-goolge-login{
+.form-google-login{
     background-color: white;
     cursor: pointer;
     border: 1px solid black;
@@ -281,7 +323,7 @@
     padding:10px 7px;
     color: black !important;
 }
-.form-goolge-login:hover > div,.form-goolge-login:hover{
+.form-google-login:hover > div,.form-google-login:hover{
     border: none;
     color:white !important;
     background-color: #ea4335;
@@ -309,6 +351,7 @@
     outline: none;
 }
 .login-section-interact{
+    overflow-x: hidden;
     width: 45%;
     background-color: white;
     padding: 20px 30px;
@@ -361,4 +404,9 @@
     right: 25px;
     top: 10px;
     cursor: pointer;
+}
+
+.password-notification{
+    font-size: 12px;
+    font-style: italic;
 }
