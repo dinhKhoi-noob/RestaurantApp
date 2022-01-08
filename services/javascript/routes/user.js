@@ -21,13 +21,31 @@ route.get('/', (req, res)=>{
     }
 })
 
+route.patch('/expired/:id',(req,res)=>{
+    try {
+        const userId = req.params.id;
+        const {isExpired} = req.body;
+        connection.query(`Update users set is_expired = ${isExpired} where visible_id like '${userId}'`,(err,result)=>{
+            if(err){
+                return res.status(500).json({success:false,message:"Internal server failed"});
+            }
+            return res.json({success:true});
+        })
+    } catch (error) {
+        return res.status(500).json({success:false,message:"Internal server failed"});
+    }
+});
+
 route.get('/:id', (req, res)=>{
     try {
-        connection.query(`Select username, balance, email, address, total_saving from users where visible_id=${req.params.id}`,(err,result)=>{
+        connection.query(`Select username, email, address, avatar, phone, is_expired from users where visible_id=${req.params.id}`,(err,result)=>{
             if(!result || result.length <= 0){
-                return res.status(404).json({success:false,message:"Not found"});
+                return res.status(404).json({success:false,message:"Not existed"});
             }
-            return res.json({success:true,message:"Successfully",result})
+            if(result[0].is_expired === 1){
+                return res.status(403).json({success:false,message:"Is expired"});
+            }
+            return res.json({success:true,message:"Successfully",user:result[0]})
         });
     } catch (error) {
         console.log(error);
@@ -67,7 +85,7 @@ route.post('/register',userMiddleware.registerMiddleware,async(req,res)=>{
         const salt = await bcrypt.genSalt(10);
         const passwordHashed = await bcrypt.hash(password,salt);
         const visibleId = randomString.generate(10);
-        let query = `insert into users (visible_id,username,password,email) values('${visibleId}','${username}','${passwordHashed}','${email}')`;
+        let query = `insert into users (visible_id,username,password,email,is_logged) values('${visibleId}','${username}','${passwordHashed}','${email}',1)`;
         connection.query(query,(err,result) => {
             if(result){
                 jwt.sign({
@@ -100,7 +118,7 @@ route.post('/register',userMiddleware.registerMiddleware,async(req,res)=>{
                             console.log(err);
                             return res.status(500).json({success:false,message:"Internal server failed"})
                         }
-                        return res.json({success:true,message:"Account has been created"});
+                        return res.json({success:true,message:"Account has been created",uid:visibleId});
                     })
                 });
             }
@@ -115,12 +133,15 @@ route.post('/login',userMiddleware.loginMiddleware,(req,res)=>{
     try {
         const bcrypt = require('bcryptjs');
         const {email,password} = req.body;
+        let passwordValid;
         connection.query(`select * from users where email='${email}'`,async(error,result)=>{
-            if(!result || result.length <= 0)
-                return res.status(401).json({success:false,message:"Invalid email or password"});
-            const passwordValid = await bcrypt.compare(password,result[0].password);
-            if(!passwordValid)
-            {
+            if(!result || result.length <= 0){
+                return res.status(401).json({success:false,message:"Invalid email or password"});   
+            }
+            if(result[0].password){
+                passwordValid = await bcrypt.compare(password,result[0].password);
+            }
+            if(!passwordValid){
                 return res.status(401).json({success:false,message:"Invalid email or password"});
             }
             if(result[0].is_confirmed === 0){
@@ -171,7 +192,6 @@ route.post('/login',userMiddleware.loginMiddleware,(req,res)=>{
                 iat: new Date().getTime(),
                 exp: new Date().setDate(new Date().getDate() + 3)
             },process.env.ACCESS_TOKEN_SECRET);
-            res.setHeader("user_id",result[0].visible_id);
             res.setHeader('Authorization',accessToken);
             return res.status(200).json({success:true,message:"Login successfully"});
         });   
@@ -181,24 +201,29 @@ route.post('/login',userMiddleware.loginMiddleware,(req,res)=>{
     }
 })
 
-route.get('/google/callback',passport.authenticate('google',{failureRedirect:'/google'}),(req,res)=>{
+route.get('/google/callback',passport.authenticate('google',{failureRedirect:'/page/auth/google'}),(req,res)=>{
     const user = req.user;
     try {
         const profilePictureType = user.photos[0].value.split('/')[3];
-        connection.query(`select * from users where visible_id like '${user.id}'`,(err,result)=>{
+        connection.query(`select * from users where email like '${user._json.email}'`,(err,result)=>{
             if(result.length > 0){
+                console.log(result[0]);
+                if(result[0].login_by !== 'google'){
+                    return res.redirect('/page/auth?existed_email='+result[0].login_by);
+                }
                 return res.redirect(`/page/index?uid=${user.id}`);
             }
-            connection.query(`insert into users(visible_id, username, email${profilePictureType !== 'a'?',avatar':''}) values('${user.id}','${user._json.given_name}','${user._json.email}'${profilePictureType !== 'a'?`,'${user.photos[0].value}'`:''})`,(err,result)=>{
+            connection.query(`insert into users(visible_id, username, login_by, email${profilePictureType !== 'a'?',avatar':''}) values('${user.id}','${user._json.given_name}','google','${user._json.email}'${profilePictureType !== 'a'?`,'${user.photos[0].value}'`:''})`,(err,result)=>{
                 if(err)
                 {
-                    return res.redirect('/google');
+                    return res.redirect('/page/auth/google');
                 }
                 connection.query(`select * from users where visible_id like '${user.id}'`,(err,users)=>{
                     if(users.length > 0){
+                        
                         return res.redirect(`/page/index?uid=${user.id}`);
                     }
-                    return res.redirect('/google');
+                    return res.redirect('/page/auth/google');
                 })
             })
         })
@@ -208,23 +233,26 @@ route.get('/google/callback',passport.authenticate('google',{failureRedirect:'/g
     }
 })
 
-route.get('/facebook/callback',passport.authenticate('facebook',{failureRedirect:'/facebook'}),(req,res)=>{
+route.get('/facebook/callback',passport.authenticate('facebook',{failureRedirect:'/page/auth/facebook'}),(req,res)=>{
     const user = req.user;
     try {
-        connection.query(`select * from users where visible_id like '${user.id}'`,(err,result)=>{
+        connection.query(`select * from users where email like '${user._json.email}'`,(err,result)=>{
             if(result.length > 0){
-                return res.redirect(`/page/index?uid=${user.id}`);
+                if(result[0].login_by !== 'facebook'){
+                    return res.redirect('/page/auth?existed_email='+result[0].login_by);
+                }
+                return res.redirect(`/page/index?uid=${user._json.id}`);
             }
-            connection.query(`insert into users(visible_id, username, email) values('${user.id}','${user._json.name}','${user._json.email}')`,(err,result)=>{
+            connection.query(`insert into users(visible_id, username, email, login_by) values('${user._json.id}','${user._json.name}','${user._json.email}','facebook')`,(err,result)=>{
                 if(err)
                 {
-                    return res.redirect('/facebook');
+                    return res.redirect('/page/auth/facebook');
                 }
                 connection.query(`select * from users where visible_id like '${user.id}'`,(err,users)=>{
                     if(users.length > 0){
                         return res.redirect(`/page/index?uid=${user.id}`);
                     }
-                    return res.redirect('/facebook');
+                    return res.redirect('/page/auth/facebook');
                 })
             })
         })
@@ -236,6 +264,7 @@ route.get('/facebook/callback',passport.authenticate('facebook',{failureRedirect
 
 route.post('/verify',passport.authenticate('jwt',{session:false}),(req,res)=>{
     if(req.user){
+        
         return res.json({success:true,user:req.user})
     }
     return res.status(401).json({success:false});

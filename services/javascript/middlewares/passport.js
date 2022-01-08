@@ -24,6 +24,7 @@ passport.use(new JwtStrategy({
                 done(err, false);
             }
             if(result.length > 0){
+                result[0].iat = payload.iat;
                 done(null,result[0]);
             }
             else{

@@ -23,6 +23,17 @@ const spinner = document.querySelector('#spinner-container');
 
 let confirmPasswordText = registerConfirmPasswordInput.value?registerConfirmPasswordInput.value:"";
 
+const checkIsLoggedUser = () => {
+    const cookieArray = document.cookie.split(';');
+    console.log(cookieArray,document.cookie);
+    const authCookieIndex = cookieArray.findIndex(cookie=>{
+        return cookie.includes('auth=');
+    });
+    if(window.location.href.includes('/page/auth') && authCookieIndex !== -1){
+        window.location.href = 'http://localhost:4000/page/index';
+    }
+}
+
 const newUser = {
     username:registerUsernameInput.value?registerUsernameInput.value:"",
     email:registerEmailInput.value?registerEmailInput.value:"",
@@ -35,6 +46,11 @@ const loginUser = {
 }
 
 const firstTimeRenderAuthPage = () => {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const errContent = urlSearchParams.get('existed_email');
+    if(errContent){
+        showToast(`Email is already registered, please login with ${errContent.toString()}`,5000)
+    }
     loginSection.classList.add('login-content-slide-in');
     banner.classList.add('login-thumbnail-show');
 }
@@ -43,12 +59,10 @@ const displaySpinner = (isShow) => {
     isShow === true ? 
     (()=>{
         spinner.style.visibility = 'visible';
-        authPage.style.opacity = 0.1;
     })()
     :
     (()=>{
         spinner.style.visibility = 'hidden';
-        authPage.style.opacity = 1;
     })()
 }
 
@@ -60,21 +74,6 @@ const isValidPassword = (password) => {
 const isValidEmail = (email) => {
     const sampleEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return sampleEmail.test(email);
-}
-
-const showToast = (content) => {
-    const notificationToastContainer = document.querySelector('#notification-toast-container');
-    const notificationToastContent = document.querySelector('#notification-toast-content');
-    notificationToastContent.innerHTML = content;
-    notificationToastContainer.classList.add('toast-slide-in','width-240');
-    notificationToastContainer.classList.remove('toast-slide-out');
-    setTimeout(()=>{
-        notificationToastContainer.classList.add('toast-slide-out');
-        setTimeout(()=>{
-            notificationToastContainer.classList.remove('toast-slide-in','width-240');
-            notificationToastContainer.style.visibility = 'hidden !important';
-        },1000)
-    },3000)
 }
 
 googleLoginBtns.forEach(btn=>{
@@ -226,6 +225,7 @@ loginSubmit.addEventListener('submit',(event)=>{
         loginPasswordEyeToggle.style.color = 'black';
     }
     displaySpinner(true);
+    console.log(loginUser);
     fetch('http://localhost:4000/api/auth/login',{
         method:'POST',
         headers:{
@@ -256,15 +256,16 @@ loginSubmit.addEventListener('submit',(event)=>{
         fetch('http://localhost:4000/api/auth/verify',{
             method:'POST',
             headers:{
-            'Authorization':`Bearer ${accessToken}`
+                'Authorization':`Bearer ${accessToken}`
             }
         })
         .then(response=>response.json())
         .then(result=>{
             displaySpinner(false);
+            console.log(result.user.iat);
             loginPasswordInput.value = "";
             loginEmailInput.value = "";
-            window.location.href = `http://localhost:4000/page/index?uid=${result.user.visible_id}`
+            window.location.href = result.user.is_admin === 0 ? `http://localhost:4000/page/index?uid=${result.user.visible_id}`:`http://localhost:3000`;
         })
         .catch(err=>{
             displaySpinner(false);
@@ -354,6 +355,7 @@ registerSection.addEventListener('submit',(event)=>{
             showToast(result.message);
             return;
         }
+        setExpiredCookie(0,result.uid);
         registerConfirmPasswordInput.value = "";
         registerPasswordInput.value = "";
         registerEmailInput.value = "";
@@ -381,3 +383,4 @@ backToAuthBtn.addEventListener('click',()=>{
 })
 
 firstTimeRenderAuthPage();
+checkIsLoggedUser();
