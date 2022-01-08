@@ -5,6 +5,47 @@ const openOrderListBtn = document.querySelector("#show-order-list-btn");
 const scrollToTopBtnTooltip = document.querySelector("#scroll-top-btn-tooltip");
 const openOrderListBtnTooltip = document.querySelector('#order-list-btn-tooltip');
 
+const setAuthCookie = (uid) => {
+  fetch(`http://localhost:4000/api/auth/${uid}`)
+  .then((response)=>response.json())
+  .then(result=>{
+    if(result.success)
+    {
+      if(result.user.is_expired === 1){
+        showToast("User is not existed");
+        return;
+      }
+      const currentTime = new Date(Date.now());
+      const expireDate = new Date(currentTime.setHours(currentTime.getHours() + 1)).toUTCString();
+      localStorage.setItem('user',JSON.stringify(result.user));
+      document.cookie = `auth=${uid}; expires=${expireDate}; path=/page`;
+      return;
+    }
+    showToast("User is not existed");
+    setTimeout(()=>{
+      window.location.search = "";
+    },3000);
+  })
+  .catch(err=>{
+    showToast("User is not existed");
+    setTimeout(()=>{
+      window.location.search = "";
+    },3000);
+  })
+}
+
+const checkLoggedUser = () =>{
+  const authCookie = document.cookie.includes('auth=');
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  const userId = urlSearchParams.get('uid');
+  if(!authCookie){
+    setExpiredCookie(1,userId);
+  }
+  if(userId && !authCookie){
+    setAuthCookie(userId);
+  }
+}
+
 scrollToTopBtn.addEventListener('mouseover',()=>{
   scrollToTopBtnTooltip.classList.add("display-tooltip");
   scrollToTopBtnTooltip.classList.remove("hide-tooltip");
@@ -91,3 +132,4 @@ $(window).scroll(function() {
   }
 });
 
+checkLoggedUser();

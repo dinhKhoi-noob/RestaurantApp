@@ -254,7 +254,6 @@
     background-color: white;
 }
 
-
 .register-section-content{
     display: none;
     position: relative;
@@ -312,33 +311,50 @@
 }
 .form-oauth-login{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: 1rem 0 1.5rem 0;
 }
 .form-google-login{
+    transition-delay: .1s;
     background-color: white;
     cursor: pointer;
     border: 1px solid black;
     border-radius: 10px;
-    padding:10px 7px;
+    padding: 10px 7px;
     color: black !important;
+    transition: .5s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 13px;
 }
-.form-google-login:hover > div,.form-google-login:hover{
+.form-google-login:hover{
     border: none;
     color:white !important;
     background-color: #ea4335;
+    transform: scale(1.05) translateY(-5%);
 }
-.form-facebook-login:hover > div,.form-facebook-login:hover{
+.form-facebook-login:hover{
     border: none;
     color:white !important;
     background-color: #3c538c;
+    transform: scale(1.05) translateY(-5%);
 }
 .form-facebook-login{
-    cursor: pointer;
+    transition-delay: .2s;
     background-color: white;
+    cursor: pointer;
     border: 1px solid black;
     border-radius: 10px;
-    padding:10px 7px;
+    padding: 10px 7px;
+    color: black !important;
+    transition: .5s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 13px;
 }
 .form-input{
     padding: 10px 30px 10px 10px;
@@ -409,4 +425,8 @@
 .password-notification{
     font-size: 12px;
     font-style: italic;
+}
+
+.z-index-2{
+    z-index: 2;
 }

@@ -96,6 +96,7 @@
 }
 
 .slash-page-btn{
+    position: relative;
     display: flex;
     padding: 20px 40px;
     transition: .5s;
@@ -111,5 +112,37 @@
 
 .slash-page-btn:hover{
     color: white;
+    border:1px solid darkgreen;
+    transition-delay: .3s;
+}
+
+.slash-page-btn{
+    transition: 1.2s;
+}
+
+.slash-page-btn:hover::before{
+    transition-delay: .15s;
+}
+
+.slash-page-btn:hover::after{
+    background-color: darkgreen;
+    transition-delay: .15s ;
+}
+
+.slash-page-btn:before,
+.slash-page-btn:after {
+    content: '';
+	position: absolute;	
+	transition: inherit;
+	z-index: 1;
+	top: 0;
+    right: 0;
+	width: 0;
+	height: 100%;
+}
+
+.slash-page-btn:hover:before,
+.slash-page-btn:hover:after {
+	width: 100%;
     background-color: darkgreen;
 }
