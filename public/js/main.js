@@ -4,45 +4,15 @@ const scrollToTopBtn = document.querySelector("#scroll-to-top-btn");
 const openOrderListBtn = document.querySelector("#show-order-list-btn");
 const scrollToTopBtnTooltip = document.querySelector("#scroll-top-btn-tooltip");
 const openOrderListBtnTooltip = document.querySelector('#order-list-btn-tooltip');
+const profileToggleBtn = document.querySelector('#profile-toggle-button');
 
-const setAuthCookie = (uid) => {
-  fetch(`http://localhost:4000/api/auth/${uid}`)
-  .then((response)=>response.json())
-  .then(result=>{
-    if(result.success)
-    {
-      if(result.user.is_expired === 1){
-        showToast("User is not existed");
-        return;
-      }
-      const currentTime = new Date(Date.now());
-      const expireDate = new Date(currentTime.setHours(currentTime.getHours() + 1)).toUTCString();
-      localStorage.setItem('user',JSON.stringify(result.user));
-      document.cookie = `auth=${uid}; expires=${expireDate}; path=/page`;
-      return;
-    }
-    showToast("User is not existed");
-    setTimeout(()=>{
-      window.location.search = "";
-    },3000);
-  })
-  .catch(err=>{
-    showToast("User is not existed");
-    setTimeout(()=>{
-      window.location.search = "";
-    },3000);
-  })
-}
+let displayProfileArea = false;
 
 const checkLoggedUser = () =>{
   const authCookie = document.cookie.includes('auth=');
-  const urlSearchParams = new URLSearchParams(window.location.search);
-  const userId = urlSearchParams.get('uid');
   if(!authCookie){
-    setExpiredCookie(1,userId);
-  }
-  if(userId && !authCookie){
-    setAuthCookie(userId);
+    localStorage.removeItem('user');
+    showToast("You are not logged in now, or your login session is expired!");
   }
 }
 
@@ -72,6 +42,21 @@ checkoutListBtn.addEventListener('click',()=>{
   orderList.classList.add("show-order-list");
 })
 
+profileToggleBtn.addEventListener('click',()=>{
+  const profileToggleArea = document.querySelector('#profile-toggle-area');
+  displayProfileArea = !displayProfileArea;
+  if(displayProfileArea)
+  {
+    profileToggleArea.classList.remove('profile-narrow');
+    profileToggleArea.classList.add('profile-scale');
+  }
+  else{
+    profileToggleArea.classList.add('profile-narrow');
+    setTimeout(()=>{
+      profileToggleArea.classList.remove('profile-scale');
+    },500)
+  }
+})
 
 $( "#datepicker" ).datepicker({
   beforeShow: function (textbox, instance) {
