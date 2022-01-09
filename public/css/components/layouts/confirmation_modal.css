@@ -1,4 +1,77 @@
+@keyframes modal-title-show {
+    from{
+        width: 0;
+    }
+    to{
+        width: 220px;
+    }
+}
+
+@-webkit-keyframes modal-title-show {
+    from{
+        width: 0;
+    }
+    to{
+        width: 220px;
+    }
+}
+
+@keyframes modal-title-hide {
+    from{
+        width: 220px;
+    }
+    to{
+        width: 0;
+    }
+}
+
+@-webkit-keyframes modal-title-hide {
+    from{
+        width: 220px;
+    }
+    to{
+        width: 0;
+    }
+}
+
+.confirmation-modal-show{
+    -webkit-animation-name: show;
+    animation-name: show;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.confirmation-modal-hide{
+    -webkit-animation-name: hide;
+    animation-name: hide;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.confirmation-title-scale{
+    -webkit-animation-name: modal-title-show;
+    animation-name: modal-title-show;
+    -webkit-animation-duration: 1.5s;
+    animation-duration: 1.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.confirmation-title-narrow{
+    -webkit-animation-name: modal-title-hide;
+    animation-name: modal-title-hide;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
 .confirmation-modal-container{
+    display: none;
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -25,6 +98,7 @@
 }
 
 .confirmation-modal-title{
+    width: 0;
     border-bottom: 2px solid darkgreen;
     padding-bottom: 3px;
     color: darkgreen;

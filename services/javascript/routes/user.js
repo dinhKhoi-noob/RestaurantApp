@@ -7,6 +7,17 @@ const connection = require('../../../models/connection.js');
 const jwt = require('jsonwebtoken');
 const randomString = require('randomstring');
 
+const setLoggedStatus = async(status,uid) => {
+    try {
+        connection.query(`Update users set is_logged = ${status} where visible_id like '${uid}'`,(err,result)=>{
+            return true;
+        })
+    } catch (error) {
+        console.log(error)
+        return false;
+    }
+}
+
 const registerToken = (userId) => {
     const accessToken = jwt.sign({
         userId,
@@ -201,28 +212,37 @@ route.post('/login',userMiddleware.loginMiddleware,(req,res)=>{
                 iat: new Date().getTime(),
                 exp: new Date().setDate(new Date().getDate() + 3)
             },process.env.ACCESS_TOKEN_SECRET);
-            res.setHeader('Authorization',accessToken);
-            console.log(accessToken);
-            return res.status(200).json({success:true,message:"Login successfully"});
+            const isSettingLoggedSuccess = setLoggedStatus(1,result[0].visible_id);
+            if(isSettingLoggedSuccess)
+            {
+                res.setHeader('Authorization',accessToken);
+                return res.status(200).json({success:true,message:"Login successfully"});
+            }
+            return res.status(500).json({success:false,message:"Internal server failed"});
         });   
     } catch (error) {
         console.log(error);
         return res.status(500).json({success:false,message:"Internal server failed"});
     }
 })
-
 route.get('/google/callback',passport.authenticate('google',{failureRedirect:'/page/auth/google'}),(req,res)=>{
     const user = req.user;
     try {
         const profilePictureType = user.photos[0].value.split('/')[3];
-        connection.query(`select * from users where email like '${user._json.email}'`,(err,result)=>{
+        connection.query(`select * from users where email like '${user._json.email}'`,async(err,result)=>{
             if(result.length > 0){
                 console.log(result[0]);
                 if(result[0].login_by !== 'google'){
                     return res.redirect('/page/auth?existed_email='+result[0].login_by);
                 }
-                const token = registerToken(user.id);
-                return res.redirect(`/page/authorization?token=${token}`);
+                const isSettingLoggedSuccess = await setLoggedStatus(1,user.id);
+                console.log(isSettingLoggedSuccess);
+                if(isSettingLoggedSuccess)
+                {
+                    const token = registerToken(user.id);
+                    return res.redirect(`/page/authorization?token=${token}`);
+                }
+                return res.redirect('/page/auth');
             }
             connection.query(`insert into users(visible_id, username, login_by, email${profilePictureType !== 'a'?',avatar':''}) values('${user.id}','${user._json.given_name}','google','${user._json.email}'${profilePictureType !== 'a'?`,'${user.photos[0].value}'`:''})`,(err,result)=>{
                 if(err)
@@ -231,8 +251,13 @@ route.get('/google/callback',passport.authenticate('google',{failureRedirect:'/p
                 }
                 connection.query(`select * from users where visible_id like '${user.id}'`,(err,users)=>{
                     if(users.length > 0){
-                        const token = registerToken(user.id);
-                        return res.redirect(`/page/authorization?token=${token}`);
+                        const isSettingLoggedSuccess = setLoggedStatus(1,user.id);
+                        console.log(isSettingLoggedSuccess);
+                        if(isSettingLoggedSuccess){
+                            const token = registerToken(user.id);
+                            return res.redirect(`/page/authorization?token=${token}`);
+                        }
+                        return res.redirect('/page/auth');
                     }
                     return res.redirect('/page/auth/google');
                 })
@@ -240,7 +265,7 @@ route.get('/google/callback',passport.authenticate('google',{failureRedirect:'/p
         })
     } catch (error) {
         console.log(error);
-        return res.redirect('/google');
+        return res.redirect('/page/auth/google');
     }
 })
 
@@ -252,8 +277,12 @@ route.get('/facebook/callback',passport.authenticate('facebook',{failureRedirect
                 if(result[0].login_by !== 'facebook'){
                     return res.redirect('/page/auth?existed_email='+result[0].login_by);
                 }
-                const token = registerToken(user._json.id);
-                return res.redirect(`/page/authorization?token=${token}`);
+                const isSettingLoggedSuccess = setLoggedStatus(1,user._json.id);
+                if(isSettingLoggedSuccess){
+                    const token = registerToken(user._json.id);
+                    return res.redirect(`/page/authorization?token=${token}`);
+                }
+                return res.redirect('/page/auth');
             }
             connection.query(`insert into users(visible_id, username, email, login_by) values('${user._json.id}','${user._json.name}','${user._json.email}','facebook')`,(err,result)=>{
                 if(err)
@@ -262,8 +291,12 @@ route.get('/facebook/callback',passport.authenticate('facebook',{failureRedirect
                 }
                 connection.query(`select * from users where visible_id like '${user.id}'`,(err,users)=>{
                     if(users.length > 0){
-                        const token = registerToken(user._json.id);
-                        return res.redirect(`/page/authorization?token=${token}`);
+                        const isSettingLoggedSuccess = setLoggedStatus(1,user._json.id);
+                        if(isSettingLoggedSuccess){
+                            const token = registerToken(user._json.id);
+                            return res.redirect(`/page/authorization?token=${token}`);
+                        }
+                        return res.redirect('/page/auth');
                     }
                     return res.redirect('/page/auth/facebook');
                 })
@@ -271,7 +304,7 @@ route.get('/facebook/callback',passport.authenticate('facebook',{failureRedirect
         })
     } catch (error) {
         console.log(error);
-        return res.redirect('/google');
+        return res.redirect('/page/auth/facebook');
     }
 })
 

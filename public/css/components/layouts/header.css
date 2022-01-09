@@ -1,44 +1,44 @@
 @keyframes profile-scale {
   from{
     opacity: 0;
-    height: 65px;
+    max-height: 0px;
   }
   to{
     opacity: 1;
-    height: 75px;
+    max-height: 75px;
   }
 }
 
 @-webkit-keyframes profile-scale{
   from{
     opacity: 0;
-    height: 65px;
+    max-height: 0px;
   }
   to{
     opacity: 1;
-    height: 75px;
+    max-height: 75px;
   }
 }
 
 @keyframes profile-narrow {
   from{
     opacity: 1;
-    height: 75px;
+    max-height: 75px;
   }
   to{
     opacity: 0;
-    height: 65px;
+    max-height: 0px;
   }
 }
 
 @-webkit-keyframes profile-narrow{
   from{
     opacity: 1;
-    height: 75px;
+    max-height: 75px;
   }
   to{
     opacity: 0;
-    height: 65px;
+    max-height: 0px;
   }
 }
 

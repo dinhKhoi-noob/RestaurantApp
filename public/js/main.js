@@ -5,16 +5,72 @@ const openOrderListBtn = document.querySelector("#show-order-list-btn");
 const scrollToTopBtnTooltip = document.querySelector("#scroll-top-btn-tooltip");
 const openOrderListBtnTooltip = document.querySelector('#order-list-btn-tooltip');
 const profileToggleBtn = document.querySelector('#profile-toggle-button');
+const loggoutButton = document.querySelector('#loggout-button');
 
 let displayProfileArea = false;
 
 const checkLoggedUser = () =>{
   const authCookie = document.cookie.includes('auth=');
+  const profileDropdownBtnArea = document.querySelector("#profile-toggle-area");
   if(!authCookie){
     localStorage.removeItem('user');
     showToast("You are not logged in now, or your login session is expired!");
+    profileDropdownBtnArea.innerHTML = `
+      <div class="header-customer-navigation-profile-dropdown-item" id="profile-button">
+          <i class="fas fa-user-circle"></i>
+          Login
+      </div>
+    `
+    profileDropdownBtnArea.style.marginTop = "20px;"
+    return;
   }
+  profileDropdownBtnArea.innerHTML = `
+    <div class="header-customer-navigation-profile-dropdown-item" id="profile-button">
+        <i class="fas fa-user-circle"></i>
+        Profile
+    </div>
+    <div class="header-customer-navigation-profile-dropdown-item" id="loggout-button">
+        <i class="fas fa-door-open"></i>
+        Logout
+    </div>
+  `
 }
+
+const loggoutUser = () => {
+  const currentTime = new Date(Date.now()).toUTCString();
+  document.cookie = `auth=0; expires=${currentTime}; path=/page`;
+  localStorage.removeItem('user');
+  window.location.reload();
+}
+
+loggoutButton.addEventListener('click',()=>{
+  const profileToggleArea = document.querySelector('#profile-toggle-area');
+  displayProfileArea = !displayProfileArea;
+  profileToggleArea.classList.add('profile-narrow');
+    setTimeout(()=>{
+      profileToggleArea.classList.remove('profile-scale');
+    },500)
+  const title = "Do you really want to loggout?"
+  const btnConfirmation = [
+    {
+      id:"loggout-yes",
+      title:"Yes"
+    },
+    {
+      id:"loggout-no",
+      title:"No"
+    }
+  ];
+  displayConfirmationModal(title,btnConfirmation);
+  const loggoutAcceptanceBtn = document.querySelector(`#confirmation-modal-btn-loggout-yes`);
+  const loggoutRefusingBtn = document.querySelector('#confirmation-modal-btn-loggout-no');
+  loggoutRefusingBtn.addEventListener('click',()=>{
+    hideConfirmationModal();
+  });
+  loggoutAcceptanceBtn.addEventListener('click',()=>{
+    loggoutUser();
+  })
+})
 
 scrollToTopBtn.addEventListener('mouseover',()=>{
   scrollToTopBtnTooltip.classList.add("display-tooltip");
