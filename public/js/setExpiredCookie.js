@@ -1,8 +1,11 @@
-const setExpiredCookie = (isExpired,uid) => {
+const setExpirationSession = (nextExpirationSession,uid) => {
     fetch(`http://localhost:4000/api/auth/expired/${uid}`,{
         method:"PATCH",
+        headers:{
+            "Content-Type":"application/json"
+        },
         body:JSON.stringify({
-            isExpired
+            nextExpirationSession
         })
     })
     .then(response=>response.json())

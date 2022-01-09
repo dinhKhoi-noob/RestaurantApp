@@ -42,14 +42,25 @@
             </div>
             <div class="header-customer-navigation-container">
                 <div class="header-customer-navigation-profile">
-                    <img style="width:30px" class="header-customer-navigation-profile-btn" src="/images/icons/person.svg">
-                    
+                    <img style="width:30px" class="header-customer-navigation-profile-btn" src="/images/icons/person.svg" id="profile-toggle-button">
+                    <div class="header-customer-navigation-profile-dropdown-section" id="profile-toggle-area">
+                        <div class="header-customer-navigation-profile-dropdown-item" id="profile-button">
+                            <i class="fas fa-user-circle"></i>
+                            Profile
+                        </div>
+                        <div class="header-customer-navigation-profile-dropdown-item" id="loggout-button">
+                            <i class="fas fa-door-open"></i>
+                            Logout
+                        </div>
+                    </div>
                 </div>   
                 <div class="header-customer-navigation-cart" id="header-customer-navigation-cart">
                     <img class="header-customer-navigation-cart-btn" id="header-customer-navigation-cart-btn" src="/images/icons/bag.svg"/>
                 </div>
                 <%- include('./orderList.ejs') %>
+                <%- include('./confirmationModal.ejs') %>
             </div>
         </div>
     </div>
 </div>
+<script src="/js/confirmationModal.js"></script>

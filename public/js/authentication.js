@@ -262,9 +262,13 @@ loginSubmit.addEventListener('submit',(event)=>{
         .then(response=>response.json())
         .then(result=>{
             displaySpinner(false);
-            console.log(result.user.iat);
             loginPasswordInput.value = "";
             loginEmailInput.value = "";
+            const currentTime = new Date(Date.now());
+            const expireDate = new Date(currentTime.setHours(currentTime.getHours() + 1)).toUTCString();
+            const uid = result.user.visible_id;
+            localStorage.setItem('user',JSON.stringify(result.user));
+            document.cookie = `auth=${uid}; expires=${expireDate}; path=/page`;
             window.location.href = result.user.is_admin === 0 ? `http://localhost:4000/page/index?uid=${result.user.visible_id}`:`http://localhost:3000`;
         })
         .catch(err=>{
@@ -355,7 +359,6 @@ registerSection.addEventListener('submit',(event)=>{
             showToast(result.message);
             return;
         }
-        setExpiredCookie(0,result.uid);
         registerConfirmPasswordInput.value = "";
         registerPasswordInput.value = "";
         registerEmailInput.value = "";

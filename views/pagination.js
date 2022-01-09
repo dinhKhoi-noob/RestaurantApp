@@ -46,6 +46,7 @@ module.exports = (app) => {
             })
         })
     })
+
     app.get('/page/discount',(req,res)=>{
         let fileName = 'pages/discount.ejs'
         fs.readFile(path.resolve(__dirname,fileName),async(err,data)=>{
@@ -63,6 +64,7 @@ module.exports = (app) => {
             })
         })
     })
+
     app.get('/page/category/:id',(req,res)=>{
         const id = req.params.id;
         const root = req.query.root;
@@ -168,6 +170,10 @@ module.exports = (app) => {
     app.get('/page/auth/facebook',passport.authenticate('facebook',{authType: 'reauthenticate', scope: [ 'email', 'user_location' ]}));
     
     app.get('/page/auth/google',passport.authenticate('google',{scope:['email','profile'],session:false}));
+
+    app.get('/page/authorization',async(req,res)=>{
+        res.render('pages/authorization.ejs');
+    })
 
     app.get('/page/auth',(req,res)=>{
         return res.render('pages/authenticate.ejs');

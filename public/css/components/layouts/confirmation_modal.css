@@ -1,0 +1,130 @@
+@keyframes modal-title-show {
+    from{
+        width: 0;
+    }
+    to{
+        width: 220px;
+    }
+}
+
+@-webkit-keyframes modal-title-show {
+    from{
+        width: 0;
+    }
+    to{
+        width: 220px;
+    }
+}
+
+@keyframes modal-title-hide {
+    from{
+        width: 220px;
+    }
+    to{
+        width: 0;
+    }
+}
+
+@-webkit-keyframes modal-title-hide {
+    from{
+        width: 220px;
+    }
+    to{
+        width: 0;
+    }
+}
+
+.confirmation-modal-show{
+    -webkit-animation-name: show;
+    animation-name: show;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.confirmation-modal-hide{
+    -webkit-animation-name: hide;
+    animation-name: hide;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.confirmation-title-scale{
+    -webkit-animation-name: modal-title-show;
+    animation-name: modal-title-show;
+    -webkit-animation-duration: 1.5s;
+    animation-duration: 1.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.confirmation-title-narrow{
+    -webkit-animation-name: modal-title-hide;
+    animation-name: modal-title-hide;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.confirmation-modal-container{
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top:0;
+    left: 0;
+    z-index: 1000;
+}
+.confirmation-modal-container::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(110, 92, 92);
+    opacity: .5;
+}
+.confirmation-modal-content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1001;
+    background-color: white;
+    padding: 40px;
+}
+
+.confirmation-modal-title{
+    width: 0;
+    border-bottom: 2px solid darkgreen;
+    padding-bottom: 3px;
+    color: darkgreen;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+
+.confirmation-modal-btn-container{
+    display: flex;
+    float: right;
+    width: 150px;
+    justify-content: space-between;
+    margin-top:20px;
+}
+
+.confirmation-modal-btn-btn{
+    padding: 5px 20px;
+    border: 1px solid darkgreen;
+    border-radius: 4px;
+    color:darkgreen;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.confirmation-modal-btn-btn:hover{
+    color:white;
+    background-color: darkgreen;
+}

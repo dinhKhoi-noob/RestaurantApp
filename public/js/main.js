@@ -4,47 +4,73 @@ const scrollToTopBtn = document.querySelector("#scroll-to-top-btn");
 const openOrderListBtn = document.querySelector("#show-order-list-btn");
 const scrollToTopBtnTooltip = document.querySelector("#scroll-top-btn-tooltip");
 const openOrderListBtnTooltip = document.querySelector('#order-list-btn-tooltip');
+const profileToggleBtn = document.querySelector('#profile-toggle-button');
+const loggoutButton = document.querySelector('#loggout-button');
 
-const setAuthCookie = (uid) => {
-  fetch(`http://localhost:4000/api/auth/${uid}`)
-  .then((response)=>response.json())
-  .then(result=>{
-    if(result.success)
-    {
-      if(result.user.is_expired === 1){
-        showToast("User is not existed");
-        return;
-      }
-      const currentTime = new Date(Date.now());
-      const expireDate = new Date(currentTime.setHours(currentTime.getHours() + 1)).toUTCString();
-      localStorage.setItem('user',JSON.stringify(result.user));
-      document.cookie = `auth=${uid}; expires=${expireDate}; path=/page`;
-      return;
-    }
-    showToast("User is not existed");
-    setTimeout(()=>{
-      window.location.search = "";
-    },3000);
-  })
-  .catch(err=>{
-    showToast("User is not existed");
-    setTimeout(()=>{
-      window.location.search = "";
-    },3000);
-  })
-}
+let displayProfileArea = false;
 
 const checkLoggedUser = () =>{
   const authCookie = document.cookie.includes('auth=');
-  const urlSearchParams = new URLSearchParams(window.location.search);
-  const userId = urlSearchParams.get('uid');
+  const profileDropdownBtnArea = document.querySelector("#profile-toggle-area");
   if(!authCookie){
-    setExpiredCookie(1,userId);
+    localStorage.removeItem('user');
+    showToast("You are not logged in now, or your login session is expired!");
+    profileDropdownBtnArea.innerHTML = `
+      <div class="header-customer-navigation-profile-dropdown-item" id="profile-button">
+          <i class="fas fa-user-circle"></i>
+          Login
+      </div>
+    `
+    profileDropdownBtnArea.style.marginTop = "20px;"
+    return;
   }
-  if(userId && !authCookie){
-    setAuthCookie(userId);
-  }
+  profileDropdownBtnArea.innerHTML = `
+    <div class="header-customer-navigation-profile-dropdown-item" id="profile-button">
+        <i class="fas fa-user-circle"></i>
+        Profile
+    </div>
+    <div class="header-customer-navigation-profile-dropdown-item" id="loggout-button">
+        <i class="fas fa-door-open"></i>
+        Logout
+    </div>
+  `
 }
+
+const loggoutUser = () => {
+  const currentTime = new Date(Date.now()).toUTCString();
+  document.cookie = `auth=0; expires=${currentTime}; path=/page`;
+  localStorage.removeItem('user');
+  window.location.reload();
+}
+
+loggoutButton.addEventListener('click',()=>{
+  const profileToggleArea = document.querySelector('#profile-toggle-area');
+  displayProfileArea = !displayProfileArea;
+  profileToggleArea.classList.add('profile-narrow');
+    setTimeout(()=>{
+      profileToggleArea.classList.remove('profile-scale');
+    },500)
+  const title = "Do you really want to loggout?"
+  const btnConfirmation = [
+    {
+      id:"loggout-yes",
+      title:"Yes"
+    },
+    {
+      id:"loggout-no",
+      title:"No"
+    }
+  ];
+  displayConfirmationModal(title,btnConfirmation);
+  const loggoutAcceptanceBtn = document.querySelector(`#confirmation-modal-btn-loggout-yes`);
+  const loggoutRefusingBtn = document.querySelector('#confirmation-modal-btn-loggout-no');
+  loggoutRefusingBtn.addEventListener('click',()=>{
+    hideConfirmationModal();
+  });
+  loggoutAcceptanceBtn.addEventListener('click',()=>{
+    loggoutUser();
+  })
+})
 
 scrollToTopBtn.addEventListener('mouseover',()=>{
   scrollToTopBtnTooltip.classList.add("display-tooltip");
@@ -72,6 +98,21 @@ checkoutListBtn.addEventListener('click',()=>{
   orderList.classList.add("show-order-list");
 })
 
+profileToggleBtn.addEventListener('click',()=>{
+  const profileToggleArea = document.querySelector('#profile-toggle-area');
+  displayProfileArea = !displayProfileArea;
+  if(displayProfileArea)
+  {
+    profileToggleArea.classList.remove('profile-narrow');
+    profileToggleArea.classList.add('profile-scale');
+  }
+  else{
+    profileToggleArea.classList.add('profile-narrow');
+    setTimeout(()=>{
+      profileToggleArea.classList.remove('profile-scale');
+    },500)
+  }
+})
 
 $( "#datepicker" ).datepicker({
   beforeShow: function (textbox, instance) {

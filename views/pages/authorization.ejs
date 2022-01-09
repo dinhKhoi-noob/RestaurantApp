@@ -1,0 +1,24 @@
+<script>
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const accessToken = urlSearchParams.get('token');
+    if(accessToken){
+        fetch('http://localhost:4000/api/auth/verify',{
+            method:'POST',
+            headers:{
+                'Authorization':`Bearer ${accessToken}`
+            }
+        })
+        .then(response=>response.json())
+        .then(result=>{
+            const currentTime = new Date(Date.now());
+            const expireDate = new Date(currentTime.setHours(currentTime.getHours() + 1)).toUTCString();
+            const uid = result.user.visible_id;
+            localStorage.setItem('user',JSON.stringify(result.user));
+            document.cookie = `auth=${uid}; expires=${expireDate}; path=/page`;
+            window.location.href = result.user.is_admin === 0 ? `http://localhost:4000/page/index`:`http://localhost:3000`;
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+    }
+</script>
