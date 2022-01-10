@@ -82,3 +82,7 @@
 .notification-toast-content{
     font-size: 15px;
 }
+
+.notification-toast-close-btn{
+    cursor: pointer;
+}
