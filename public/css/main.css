@@ -368,4 +368,17 @@ html {
   width: 25%;
 }
 
+.mt-20px{
+  margin-top: 20px;
+}
+
+.black-href{
+  text-decoration: none;
+  color: black;
+}
+
+.black-href:visited{
+  color: black;
+}
+
 /*# sourceMappingURL=main.css.map */

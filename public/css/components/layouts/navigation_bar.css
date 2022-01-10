@@ -80,5 +80,12 @@
     opacity: 0;
   }
 }
-
+.profile-navbar-toggle-area{
+  display: none;
+  position: absolute;
+  background-color: white;
+  color: black;
+  margin-top: 20px;
+  box-shadow: 0 0 2px 0;
+}
 /*# sourceMappingURL=navigation_bar.css.map */

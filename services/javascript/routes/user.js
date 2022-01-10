@@ -7,17 +7,6 @@ const connection = require('../../../models/connection.js');
 const jwt = require('jsonwebtoken');
 const randomString = require('randomstring');
 
-const setLoggedStatus = async(status,uid) => {
-    try {
-        connection.query(`Update users set is_logged = ${status} where visible_id like '${uid}'`,(err,result)=>{
-            return true;
-        })
-    } catch (error) {
-        console.log(error)
-        return false;
-    }
-}
-
 const registerToken = (userId) => {
     const accessToken = jwt.sign({
         userId,
@@ -58,12 +47,9 @@ route.patch('/expired/:id',(req,res)=>{
 
 route.get('/:id', (req, res)=>{
     try {
-        connection.query(`Select username, email, address, avatar, phone, is_expired from users where visible_id=${req.params.id}`,(err,result)=>{
+        connection.query(`Select username, email, address, avatar, phone from users where visible_id=${req.params.id}`,(err,result)=>{
             if(!result || result.length <= 0){
                 return res.status(404).json({success:false,message:"Not existed"});
-            }
-            if(result[0].is_expired === 1){
-                return res.status(403).json({success:false,message:"Is expired"});
             }
             return res.json({success:true,message:"Successfully",user:result[0]})
         });
@@ -212,13 +198,9 @@ route.post('/login',userMiddleware.loginMiddleware,(req,res)=>{
                 iat: new Date().getTime(),
                 exp: new Date().setDate(new Date().getDate() + 3)
             },process.env.ACCESS_TOKEN_SECRET);
-            const isSettingLoggedSuccess = setLoggedStatus(1,result[0].visible_id);
-            if(isSettingLoggedSuccess)
-            {
-                res.setHeader('Authorization',accessToken);
-                return res.status(200).json({success:true,message:"Login successfully"});
-            }
-            return res.status(500).json({success:false,message:"Internal server failed"});
+            connection.query(`Update users set is_logged = 1 where visible_id like '${result[0].visible_id}'`);
+            res.setHeader('Authorization',accessToken);
+            return res.status(200).json({success:true,message:"Login successfully"});
         });   
     } catch (error) {
         console.log(error);
@@ -235,14 +217,9 @@ route.get('/google/callback',passport.authenticate('google',{failureRedirect:'/p
                 if(result[0].login_by !== 'google'){
                     return res.redirect('/page/auth?existed_email='+result[0].login_by);
                 }
-                const isSettingLoggedSuccess = await setLoggedStatus(1,user.id);
-                console.log(isSettingLoggedSuccess);
-                if(isSettingLoggedSuccess)
-                {
-                    const token = registerToken(user.id);
-                    return res.redirect(`/page/authorization?token=${token}`);
-                }
-                return res.redirect('/page/auth');
+                connection.query(`Update users set is_logged = 1 where visible_id like '${user.id}'`);
+                const token = registerToken(user.id);
+                return res.redirect(`/page/authorization?token=${token}`);
             }
             connection.query(`insert into users(visible_id, username, login_by, email${profilePictureType !== 'a'?',avatar':''}) values('${user.id}','${user._json.given_name}','google','${user._json.email}'${profilePictureType !== 'a'?`,'${user.photos[0].value}'`:''})`,(err,result)=>{
                 if(err)
@@ -251,13 +228,9 @@ route.get('/google/callback',passport.authenticate('google',{failureRedirect:'/p
                 }
                 connection.query(`select * from users where visible_id like '${user.id}'`,(err,users)=>{
                     if(users.length > 0){
-                        const isSettingLoggedSuccess = setLoggedStatus(1,user.id);
-                        console.log(isSettingLoggedSuccess);
-                        if(isSettingLoggedSuccess){
-                            const token = registerToken(user.id);
-                            return res.redirect(`/page/authorization?token=${token}`);
-                        }
-                        return res.redirect('/page/auth');
+                        connection.query(`Update users set is_logged = 1 where visible_id like '${user.id}'`)
+                        const token = registerToken(user.id);
+                        return res.redirect(`/page/authorization?token=${token}`);
                     }
                     return res.redirect('/page/auth/google');
                 })
@@ -277,12 +250,9 @@ route.get('/facebook/callback',passport.authenticate('facebook',{failureRedirect
                 if(result[0].login_by !== 'facebook'){
                     return res.redirect('/page/auth?existed_email='+result[0].login_by);
                 }
-                const isSettingLoggedSuccess = setLoggedStatus(1,user._json.id);
-                if(isSettingLoggedSuccess){
-                    const token = registerToken(user._json.id);
-                    return res.redirect(`/page/authorization?token=${token}`);
-                }
-                return res.redirect('/page/auth');
+                connection.query(`Update users set is_logged = 1 where visible_id like '${user._json.id}'`)
+                const token = registerToken(user._json.id);
+                return res.redirect(`/page/authorization?token=${token}`);
             }
             connection.query(`insert into users(visible_id, username, email, login_by) values('${user._json.id}','${user._json.name}','${user._json.email}','facebook')`,(err,result)=>{
                 if(err)
@@ -291,12 +261,9 @@ route.get('/facebook/callback',passport.authenticate('facebook',{failureRedirect
                 }
                 connection.query(`select * from users where visible_id like '${user.id}'`,(err,users)=>{
                     if(users.length > 0){
-                        const isSettingLoggedSuccess = setLoggedStatus(1,user._json.id);
-                        if(isSettingLoggedSuccess){
-                            const token = registerToken(user._json.id);
-                            return res.redirect(`/page/authorization?token=${token}`);
-                        }
-                        return res.redirect('/page/auth');
+                        connection.query(`Update users set is_logged = 1 where visible_id like '${user._json.id}'`)
+                        const token = registerToken(user._json.id);
+                        return res.redirect(`/page/authorization?token=${token}`);
                     }
                     return res.redirect('/page/auth/facebook');
                 })
@@ -314,6 +281,18 @@ route.post('/verify',passport.authenticate('jwt',{session:false}),(req,res)=>{
         return res.json({success:true,user:req.user})
     }
     return res.status(401).json({success:false});
+})
+
+route.patch('/loggout/:id',(req,res)=>{
+    try {
+        const userId = req.params.id;
+        const latestLoggedIn = new Date(Date.now()).toISOString().split('T')[0] + new Date(Date.now()).toLocaleString('en-US', { hour12: false }).split(',')[1]
+        console.log(`Update users set is_logged = 0, latest_logged_in = '${latestLoggedIn}' where visible_id like '${userId}'`);
+        connection.query(`Update users set is_logged = 0, latest_logged_in = '${latestLoggedIn}' where visible_id like '${userId}'`);
+        return res.json({success:true});
+    } catch (error) {
+        res.status(500).json({success:false,message:"Internal server failed"});
+    }
 })
 
 module.exports = route;
