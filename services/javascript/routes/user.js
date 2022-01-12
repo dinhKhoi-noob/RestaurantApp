@@ -287,7 +287,6 @@ route.patch('/loggout/:id',(req,res)=>{
     try {
         const userId = req.params.id;
         const latestLoggedIn = new Date(Date.now()).toISOString().split('T')[0] + new Date(Date.now()).toLocaleString('en-US', { hour12: false }).split(',')[1]
-        console.log(`Update users set is_logged = 0, latest_logged_in = '${latestLoggedIn}' where visible_id like '${userId}'`);
         connection.query(`Update users set is_logged = 0, latest_logged_in = '${latestLoggedIn}' where visible_id like '${userId}'`);
         return res.json({success:true});
     } catch (error) {

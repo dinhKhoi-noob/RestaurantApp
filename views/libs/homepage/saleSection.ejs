@@ -1,10 +1,10 @@
 <link rel="stylesheet" href="/css/components/homepage/sale_section.css"/>
+<%if(products.length > 7){%>
 <div class="sale-section-container">
 	<div class="sale-section-title">
 		On sale
 	</div>
 	<div class="sale-section-product-list">
-		<% let images=['bbq.jpg','cupcake.jpg','france-dishes-1.jpg','spaghetti.jpg','italia-dishes-1.jpg','lamb-red-wine.jpg','red-wine.jpg','sashimi.png'] %>
 		<% for (let i=0;i < 2;i++){ %>
 		<div class="sale-section-product-pair">
 			<%if(products[i*4]){%>
@@ -29,7 +29,7 @@
 									<%=products[i*4].price * (100-products[i*4].sale_percent)/100%>
 								</div>
 							</div>
-							<a class="sale-section-product-button" href="/page/dish/<%=products[i*4].visible_id%>">
+							<a class="sale-section-product-button" href="/page/discount_dish/<%=products[i*4].visible_id%>">
 								Order now
 							</a>
 						</div>
@@ -58,7 +58,7 @@
 									<%=products[i*4+1].price * (100 - products[i*4+1].sale_percent)/100%>
 								</div>
 							</div>
-							<a class="sale-section-product-button" href="/page/dish/<%=products[i*4+1].visible_id%>">
+							<a class="sale-section-product-button" href="/page/discount_dish/<%=products[i*4+1].visible_id%>">
 								Order now
 							</a>
 						</div>
@@ -89,7 +89,7 @@
 									<%=products[i*4+2].price * (100 - products[i*4+2].sale_percent)/100%>
 								</div>
 							</div>
-							<a class="sale-section-product-button" href="/page/dish/<%=products[i*4+2].visible_id%>">
+							<a class="sale-section-product-button" href="/page/discount_dish/<%=products[i*4+2].visible_id%>">
 								Order now
 							</a>
 						</div>
@@ -118,7 +118,7 @@
 								<%=products[i*4+3].price * (100 - products[i*4+3].sale_percent)/100%>
 							</div>
 						</div>
-						<a class="sale-section-product-button" href="/page/dish/<%=products[i*4+3].visible_id%>">
+						<a class="sale-section-product-button" href="/page/discount_dish/<%=products[i*4+3].visible_id%>">
 							Order now
 						</a>
 					</div>
@@ -133,3 +133,6 @@
 		<div id="main-dishes"></div>
 	</div>
 </div>
+<%}else{%>
+	<div></div>	
+<%}%>

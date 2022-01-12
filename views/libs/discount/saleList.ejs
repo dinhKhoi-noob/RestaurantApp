@@ -22,7 +22,7 @@
                                     <%=(100-products[i*4+j].sale_percent) * products[i*4+j].price/100%>
                                 </div>
                             </div>
-                            <a class="product-buy-btn" href="/page/dish/<%=products[i*4+j].visible_id%>">
+                            <a class="product-buy-btn" href="/page/discount_dish/<%=products[i*4+j].visible_id%>">
                                 Order now
                             </a>
                         </div>
@@ -32,7 +32,4 @@
         <%}%>
     </div>
     <%}%>
-    <button class="quick-shopping" id="quick-shopping">
-        Quick shopping
-    </button>
 </div>
