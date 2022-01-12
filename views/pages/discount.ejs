@@ -30,14 +30,7 @@
         <div class="discount-body">
             <%- include('../libs/discount/banner.ejs') %>
             <%- include('../libs/discount/saleList.ejs',{products:data.products}) %>
-            <%- include('../libs/discount/quickShopping.ejs',{categories:data.categories}) %>
         </div>
-        <!-- <%if(data){%>
-            <% for(let i = 0;i < data.products.length;i++) {%>
-            <strong><%=data.products[i].title%></strong>
-            <br/>
-            <%}%>
-        <%}%>     -->
         <%- include('../libs/layouts/footer.ejs') %>
     </div>
     <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>

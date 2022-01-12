@@ -9,6 +9,7 @@ const orderRoute = require("./services/javascript/routes/order");
 const orderItemRoute = require("./services/javascript/routes/orderItem");
 const discountRoute = require("./services/javascript/routes/discount");
 const paymentRoute = require("./services/javascript/routes/payment");
+const discountDishRoute = require("./services/javascript/routes/discountedDish");
 
 app.set('view engine','ejs');
 app.use(session({secret:'cats',resave:true,saveUninitialized:true,cookie:{secure:true}}));
@@ -22,6 +23,7 @@ app.use('/api/order',orderRoute);
 app.use('/api/order_item',orderItemRoute);
 app.use('/api/discount',discountRoute);
 app.use('/api/payment',paymentRoute);
+app.use('/api/discount_dish',discountDishRoute);
 require('./views/pagination')(app);
 
 app.listen(4000,()=>{
