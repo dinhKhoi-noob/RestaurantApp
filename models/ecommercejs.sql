@@ -45,7 +45,7 @@ CREATE TABLE `categories` (
 -- Dumping data for table `categories`
 --
 
-INSERT DELAYED INTO `categories` (`visible_id`, `category_id`, `title`) VALUES
+INSERT INTO `categories` (`visible_id`, `category_id`, `title`) VALUES
 ('appetizer', 'appetizer', 'Appetizer'),
 ('cake', 'dessert', 'Cake'),
 ('cupcake', 'dessert', 'Cupcake'),
@@ -91,7 +91,7 @@ CREATE TABLE `discounted_dishes` (
 -- Dumping data for table `discounted_dishes`
 --
 
-INSERT DELAYED INTO `discounted_dishes` (`visible_id`, `dish_id`, `discount_id`, `sale_percent`) VALUES
+INSERT  INTO `discounted_dishes` (`visible_id`, `dish_id`, `discount_id`, `sale_percent`) VALUES
 ('1234567890', 'mostfav02', '1234567891', 25),
 ('1234567891', 'france03', '1234567890', 20),
 ('1234567892', 'france01', '1234567890', 30),
@@ -126,7 +126,7 @@ CREATE TABLE `discounts` (
 -- Dumping data for table `discounts`
 --
 
-INSERT DELAYED INTO `discounts` (`visible_id`, `title`, `desc`, `date_begin`, `date_end`, `date_created`, `date_modified`) VALUES
+INSERT  INTO `discounts` (`visible_id`, `title`, `desc`, `date_begin`, `date_end`, `date_created`, `date_modified`) VALUES
 ('1234567890', 'Christmas', 'For Christmas day 2021', '2021-01-21 15:18:58', '2022-01-28 15:18:58', '2022-01-12 15:20:32', '2022-01-12 15:20:32'),
 ('1234567891', 'New year', 'For New year event', '2022-01-01 16:39:39', '2022-01-10 16:39:39', '2022-01-12 16:40:13', '2022-01-12 16:40:13');
 
@@ -221,7 +221,7 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT DELAYED INTO `products` (`visible_id`, `category_id`, `price`, `sale_percent`, `on_sale`, `root_category`, `thumbnail`, `service`, `title`, `description`, `is_active`, `date_modified`) VALUES
+INSERT  INTO `products` (`visible_id`, `category_id`, `price`, `sale_percent`, `on_sale`, `root_category`, `thumbnail`, `service`, `title`, `description`, `is_active`, `date_modified`) VALUES
 ('cake01', 'cake', 10, 20, 1, 'dessert', 'cake-dinner-black-forest.jpg', 'dinner', 'Black Forest Cake', 'No desc', 1, '2022-01-12 14:20:36'),
 ('cake02', 'cake', 12, 0, 0, 'dessert', 'cake-dinner-chocolate-cake.jpg', 'breakfast', 'Chocolate Cake', 'No desc', 1, '2022-01-12 14:20:36'),
 ('cake03', 'cake', 10, 0, 0, 'dessert', 'cake-dinner-matcha.jpg', 'breakfast', 'Matcha Cake', 'No desc', 1, '2022-01-12 14:20:36'),
@@ -290,7 +290,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT DELAYED INTO `users` (`visible_id`, `username`, `password`, `email`, `login_by`, `role`, `is_admin`, `is_confirmed`, `is_logged`, `latest_logged_in`, `address`, `phone`, `balance`, `total_saving`, `avatar`) VALUES
+INSERT  INTO `users` (`visible_id`, `username`, `password`, `email`, `login_by`, `role`, `is_admin`, `is_confirmed`, `is_logged`, `latest_logged_in`, `address`, `phone`, `balance`, `total_saving`, `avatar`) VALUES
 ('111157150398778491825', 'Đình Khôi', NULL, 'khoip1305@gmail.com', 'google', 'customer', 0, 0, 1, '2022-01-10 20:30:03', NULL, NULL, 0, 0, 'user_avatar'),
 ('G1EaMu9R05', 'DinhKhoiDepTr', '$2a$10$SoAyJhg.1J952Cmuf4flxu1CALNi1KdIsRE9CKo8eSLtpsgPR524y', 'khoib1805777@student.ctu.edu.vn', 'email', 'customer', 0, 1, 1, '2022-01-09 00:00:00', NULL, NULL, 0, 0, 'user_avatar');
 

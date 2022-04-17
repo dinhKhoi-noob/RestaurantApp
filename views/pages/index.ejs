@@ -38,7 +38,7 @@
     <div class="container">
       <%- include('../libs/layouts/navigationBar.ejs') %> <%-
       include('../libs/layouts/notificationToast.ejs') %> <%-
-      include('../libs/layouts/header.ejs') %> <%-
+      include('../libs/layouts/header.ejs',{categories:data.categories}) %> <%-
       include('../libs/layouts/orderDishToast.ejs') %> <%-
       include("../libs/homepage/categoryList.ejs",{categories:data.categories})
       %> <%- include('../libs/homepage/introduction.ejs') %>

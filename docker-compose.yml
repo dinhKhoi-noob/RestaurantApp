@@ -1,0 +1,55 @@
+version: "3.8"
+services:
+    mysqldb:
+        platform: linux/amd64
+        image: mysql:5.7
+        restart: always
+        networks:
+            - app-vpc
+        env_file: ./.env
+        environment:
+            - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+            - MYSQL_DATABASE=$MYSQLDB_DATABASE
+        ports:
+            - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
+        volumes:
+            - db:/var/lib/mysql
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        depends_on:
+            - mysqldb
+        environment:
+            - PMA_HOST=mysqldb
+            - PMA_PORT=3306
+            - PMA_ARBITRARY=1
+            - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+        restart: always
+        ports:
+            - 80:80
+        networks:
+            - app-vpc
+    app:
+        depends_on:
+            - mysqldb
+        image: restaurant_app_server
+        restart: unless-stopped
+        networks:
+            - app-vpc
+        env_file: ./.env
+        ports:
+            - 4000:4000
+        volumes:
+            - ./:/home/app
+            - /home/app/node_modules
+        environment:
+            - DB_HOST=mysqldb
+            - DB_USER=$MYSQLDB_USER
+            - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+            - DB_NAME=$MYSQLDB_DATABASE
+            - DB_PORT=$MYSQLDB_DOCKER_PORT
+        stdin_open: true
+        tty: true
+volumes:
+    db:
+networks:
+    app-vpc:

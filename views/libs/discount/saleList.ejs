@@ -1,35 +1,38 @@
-<link rel="stylesheet" href="/css/components/discount/sale_list.css"/>
+<link rel="stylesheet" href="/css/components/discount/sale_list.css" />
 <div class="discount-sale-list-container">
-    <%for(let i = 0;i < Math.round(products.length/4);i++){%>
-    <div class="discount-sale-list-column">
-        <%for(let j = 0;j < 4;j++){%>
-            <%if(products[i*4+j]){%>
-                <div class="discount-sale-list-element">
-                    <img src="/images/product-images/<%=products[i*4+j].thumbnail%>" alt="thumbnail" class="discount-sale-list-element-thumbnail">
-                    <div class="discount-sale-list-element-info-container">
-                        <div class="product-title">
-                            <%=products[i*4+j].title%>
-                        </div>
-                        <div class="product-desc">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                        </div>
-                        <div class="product-buy-section justify-space-between">
-                            <div class="product-price-container">
-                                <div class="product-price-real">
-                                    <%=products[i*4+j].price%>
-                                </div>
-                                <div class="product-price-sale">
-                                    <%=(100-products[i*4+j].sale_percent) * products[i*4+j].price/100%>
-                                </div>
-                            </div>
-                            <a class="product-buy-btn" href="/page/discount_dish/<%=products[i*4+j].visible_id%>">
-                                Order now
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            <%}%>
-        <%}%>
+  <% if(products){ %> <%for(let i = 0;i < Math.round(products.length/4);i++){%>
+  <div class="discount-sale-list-column">
+    <%for(let j = 0;j < 4;j++){%> <%if(products[i*4+j]){%>
+    <div class="discount-sale-list-element">
+      <img
+        src="/images/product-images/<%=products[i*4+j].thumbnail%>"
+        alt="thumbnail"
+        class="discount-sale-list-element-thumbnail"
+      />
+      <div class="discount-sale-list-element-info-container">
+        <div class="product-title"><%=products[i*4+j].title%></div>
+        <div class="product-desc">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua
+        </div>
+        <div class="product-buy-section justify-space-between">
+          <div class="product-price-container">
+            <div class="product-price-real"><%=products[i*4+j].price%></div>
+            <div class="product-price-sale">
+              <%=(100-products[i*4+j].sale_percent) *
+              products[i*4+j].price/100%>
+            </div>
+          </div>
+          <a
+            class="product-buy-btn"
+            href="/page/discount_dish/<%=products[i*4+j].visible_id%>"
+          >
+            Order now
+          </a>
+        </div>
+      </div>
     </div>
-    <%}%>
+    <%}%> <%}%>
+  </div>
+  <%}%> <%}%>
 </div>
